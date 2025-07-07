@@ -10,7 +10,6 @@ public class NotextureEntity extends AnimalEntity {
 
     private static final String TEXTURE_PATH = "/assets/voidcalls/stationapi/textures/entity/notexture.png";
 
-    // Wander AI variables
     private int wanderCooldown;
     private int wanderTicks;
     private float wanderYaw;
@@ -28,7 +27,6 @@ public class NotextureEntity extends AnimalEntity {
     public void tick() {
         super.tick();
 
-        // Wander behavior
         if (wanderTicks > 0) {
             double speed = 0.0025;
             float rad = (float) Math.toRadians(wanderYaw);
@@ -46,18 +44,15 @@ public class NotextureEntity extends AnimalEntity {
             }
         }
 
-        // Gravity
         if (!this.onGround) {
             this.velocityY -= 0.03;
         } else {
             this.velocityY = 0;
         }
 
-        // Move entity
         this.move(this.velocityX, this.velocityY, this.velocityZ);
     }
 
-    // Ignore all damage
     @Override
     public boolean damage(Entity attacker, int amount) {
         return false;

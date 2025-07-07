@@ -121,6 +121,5 @@ public class NotextureEntityModel extends EntityModel {
 
     @Override
     public void animateModel(LivingEntity e, float limbAngle, float limbDistance, float tickDelta) {
-        // Do nothing
     }
 }
