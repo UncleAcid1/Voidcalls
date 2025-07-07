@@ -8,9 +8,10 @@ Inspired by The Broken Script by Wendigodripp.
 
 Thank you to Dany for creating the Tropicraft Models and Rendering system!
 
-## Todo list below!
+![alt text](https://github.com/UncleAcid1/Voidcalls/blob/main/banner.jpg)
 
--------------------------
+# Todo list below!
+
 ## Entities
 
 ### Notexture
