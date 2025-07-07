@@ -166,4 +166,15 @@ All sounds are W.I.P. but are original except for the moon error, which is from 
 
 -Occasionally, the player will be sent to a maze dimension made entirely out of adminspace and adminspace.light blocks. TBD.
 
+## Dimensions
+
+-Solitude
+
+![alt text](https://github.com/UncleAcid1/Voidcalls/blob/main/solitude.jpg)
+
+-Adminspace(?)
+
+
+
+
 -------------------------
