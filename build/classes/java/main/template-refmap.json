@@ -1,0 +1,14 @@
+{
+  "mappings": {
+    "net/unkleacid/voidcalls/mixin/BiomeMixin": {
+      "<init>": "Lnet/minecraft/class_153;<init>()V"
+    }
+  },
+  "data": {
+    "named:intermediary": {
+      "net/unkleacid/voidcalls/mixin/BiomeMixin": {
+        "<init>": "Lnet/minecraft/class_153;<init>()V"
+      }
+    }
+  }
+}

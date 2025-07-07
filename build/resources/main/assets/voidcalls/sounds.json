@@ -1,0 +1,8 @@
+{
+  "hello": {
+    "category": "neutral",
+    "sounds": [
+      "stationapi/sounds/Hello.ogg"
+    ]
+  }
+}
