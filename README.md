@@ -12,6 +12,8 @@ Thank you to Dany for creating the Tropicraft Models and Rendering system!
 
 # Todo list below!
 
+
+
 ## Entities
 
 ### Notexture
@@ -108,7 +110,11 @@ Thank you to Dany for creating the Tropicraft Models and Rendering system!
 
 -Never despawns.
 
--------------------------
+### Duck
+
+-Secretttt :3
+
+
 
 ## Basic mechanics
 
@@ -122,7 +128,7 @@ Thank you to Dany for creating the Tropicraft Models and Rendering system!
 
 -Config will provided to enable/disable events/entities.
 
--------------------------
+
 
 ## Blocks
 
@@ -136,13 +142,13 @@ Thank you to Dany for creating the Tropicraft Models and Rendering system!
 
 -err.soil block, which is the only block in Solitude. Functionally, dirt.
 
--------------------------
+
 
 ## Sounds
 
 All sounds are W.I.P. but are original except for the moon error, which is from the mark101 ARG.
 
--------------------------
+
 
 ## Events
 
