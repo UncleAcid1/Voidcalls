@@ -1,6 +1,5 @@
 package net.unkleacid.voidcalls.client;
 
-import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
@@ -8,89 +7,88 @@ import net.minecraft.world.World;
 import net.unkleacid.voidcalls.entity.NotextureEntity;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.util.List;
 
-public class VoidCallsClient {
+public final class VoidCallsClient {
+
     private static boolean helloPlayed = false;
-    private static Field worldField, playerField;
+
+    private static Field soundManagerField;
+    private static Method playSoundMethod;
 
     public static void onClientGameTick() {
-        Minecraft mc = (Minecraft) FabricLoader.getInstance().getGameInstance();
+        Minecraft mc = Minecraft.INSTANCE;
         if (mc == null) return;
 
-        World world = getClientWorld(mc);
-        Entity rawPlayer = getClientPlayer(mc);
-        if (!(rawPlayer instanceof LivingEntity) || world == null) return;
-        LivingEntity player = (LivingEntity) rawPlayer;
+        World world = mc.world;
+        Entity raw = mc.player;
+        if (world == null) return;
+        if (!(raw instanceof LivingEntity player)) return;
 
-        NotextureEntity closest = findClosestNotexture(world, player, 7.0);
-
-        if (closest != null) {
-            mc.camera = closest;
-
+        NotextureEntity target = findClosestNotexture(world, player, 7.0);
+        if (target != null) {
             if (!helloPlayed) {
-                mc.soundManager.playSound(
-                        "voidcalls.hello",
-                        (float) closest.x, (float) closest.y, (float) closest.z,
-                        1.0F, 1.0F
-                );
+                playHello(mc, target);
                 helloPlayed = true;
             }
         } else {
-            mc.camera = player;
             helloPlayed = false;
         }
     }
 
-    private static World getClientWorld(Minecraft mc) {
-        if (worldField == null) {
+    private static void playHello(Minecraft mc, NotextureEntity e) {
+        if (soundManagerField == null) {
             for (Field f : mc.getClass().getDeclaredFields()) {
-                if (f.getType() == World.class) {
+                if (f.getName().toLowerCase().contains("snd")) {
                     f.setAccessible(true);
-                    worldField = f;
+                    soundManagerField = f;
                     break;
                 }
             }
         }
-        try {
-            return worldField != null ? (World) worldField.get(mc) : null;
-        } catch (IllegalAccessException e) {
-            return null;
-        }
-    }
+        if (soundManagerField == null) return;
 
-    private static Entity getClientPlayer(Minecraft mc) {
-        if (playerField == null) {
-            for (Field f : mc.getClass().getDeclaredFields()) {
-                if (LivingEntity.class.isAssignableFrom(f.getType())) {
-                    f.setAccessible(true);
-                    playerField = f;
-                    break;
+        try {
+            Object sndMgr = soundManagerField.get(mc);
+            if (playSoundMethod == null) {
+                for (Method m : sndMgr.getClass().getDeclaredMethods()) {
+                    Class<?>[] p = m.getParameterTypes();
+                    if (p.length == 6
+                            && p[0] == String.class
+                            && p[1] == float.class) {
+                        m.setAccessible(true);
+                        playSoundMethod = m;
+                        break;
+                    }
                 }
             }
-        }
-        try {
-            return playerField != null ? (Entity) playerField.get(mc) : null;
-        } catch (IllegalAccessException e) {
-            return null;
+            if (playSoundMethod != null) {
+                playSoundMethod.invoke(
+                        sndMgr,
+                        "voidcalls.hello",
+                        (float) e.x, (float) e.y, (float) e.z,
+                        1.0F, 1.0F
+                );
+            }
+        } catch (Throwable ignored) {
         }
     }
 
     private static NotextureEntity findClosestNotexture(World world, LivingEntity player, double maxDist) {
-        double maxDistSq = maxDist * maxDist;
+        double maxSq = maxDist * maxDist;
         NotextureEntity closest = null;
         @SuppressWarnings("unchecked")
-        List<Entity> entities = (List<Entity>) world.entities;
-
-        for (Entity e : entities) {
-            if (e instanceof NotextureEntity) {
-                double dx = e.x - player.x;
-                double dy = e.y - player.y;
-                double dz = e.z - player.z;
-                double distSq = dx * dx + dy * dy + dz * dz;
-                if (distSq <= maxDistSq) {
-                    closest = (NotextureEntity) e;
-                    maxDistSq = distSq;
+        List<Entity> list = (List<Entity>) world.entities;
+        for (Entity ent : list) {
+            if (ent instanceof NotextureEntity ne) {
+                double dx = ne.x - player.x,
+                        dy = ne.y - player.y,
+                        dz = ne.z - player.z;
+                double dist = dx * dx + dy * dy + dz * dz;
+                if (dist < maxSq) {
+                    maxSq = dist;
+                    closest = ne;
                 }
             }
         }
