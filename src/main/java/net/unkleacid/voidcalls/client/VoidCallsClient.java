@@ -5,7 +5,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.world.World;
-import net.modificationstation.stationapi.api.event.tick.GameTickEvent;
 import net.unkleacid.voidcalls.entity.NotextureEntity;
 
 import java.lang.reflect.Field;
@@ -15,8 +14,7 @@ public class VoidCallsClient {
     private static boolean helloPlayed = false;
     private static Field worldField, playerField;
 
-    public static void onClientGameTick(GameTickEvent event) {
-        System.out.println("Its working !!!!!!!!!EFwfwefwefwefwef");
+    public static void onClientGameTick() {
         Minecraft mc = (Minecraft) FabricLoader.getInstance().getGameInstance();
         if (mc == null) return;
 

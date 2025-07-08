@@ -6,7 +6,7 @@
   "description": "Weddable women to make your world less lonely!",
   "authors": [ "UnkleAcid" ],
   "license": "MIT",
-  "icon": "assets/Voidcalls/icon.png",
+  "icon": "assets/voidcalls/icon.png",
   "environment": "*",
   "entrypoints": {
     "stationapi:event_bus": ["net.unkleacid.voidcalls.Voidcalls"],
