@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project version="4">
-  <component name="ProjectModuleManager">
-    <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Voidcalls.main.iml" filepath="$PROJECT_DIR$/.idea/modules/Voidcalls.main.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Voidcalls.test.iml" filepath="$PROJECT_DIR$/.idea/modules/Voidcalls.test.iml" />
-    </modules>
-  </component>
-</project>

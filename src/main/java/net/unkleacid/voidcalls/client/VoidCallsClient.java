@@ -1,24 +1,21 @@
 package net.unkleacid.voidcalls.client;
 
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.world.World;
-import net.modificationstation.stationapi.api.event.tick.GameTickEvent;
-import net.mine_diver.unsafeevents.listener.EventListener;
 import net.unkleacid.voidcalls.entity.NotextureEntity;
 
 import java.lang.reflect.Field;
 import java.util.List;
 
 public class VoidCallsClient {
+    private static boolean helloPlayed = false;
+    private static Field worldField, playerField;
 
-    private boolean helloPlayed = false;
-    private Field worldField, playerField;
-
-    @EventListener
-    public void onGameTick(GameTickEvent event) {
-        Minecraft mc = getMinecraftInstance();
+    public static void onClientGameTick() {
+        Minecraft mc = (Minecraft) FabricLoader.getInstance().getGameInstance();
         if (mc == null) return;
 
         World world = getClientWorld(mc);
@@ -45,7 +42,7 @@ public class VoidCallsClient {
         }
     }
 
-    private World getClientWorld(Minecraft mc) {
+    private static World getClientWorld(Minecraft mc) {
         if (worldField == null) {
             for (Field f : mc.getClass().getDeclaredFields()) {
                 if (f.getType() == World.class) {
@@ -62,7 +59,7 @@ public class VoidCallsClient {
         }
     }
 
-    private Entity getClientPlayer(Minecraft mc) {
+    private static Entity getClientPlayer(Minecraft mc) {
         if (playerField == null) {
             for (Field f : mc.getClass().getDeclaredFields()) {
                 if (LivingEntity.class.isAssignableFrom(f.getType())) {
@@ -79,7 +76,7 @@ public class VoidCallsClient {
         }
     }
 
-    private NotextureEntity findClosestNotexture(World world, LivingEntity player, double maxDist) {
+    private static NotextureEntity findClosestNotexture(World world, LivingEntity player, double maxDist) {
         double maxDistSq = maxDist * maxDist;
         NotextureEntity closest = null;
         @SuppressWarnings("unchecked")
@@ -98,15 +95,5 @@ public class VoidCallsClient {
             }
         }
         return closest;
-    }
-
-    private Minecraft getMinecraftInstance() {
-        try {
-            Field inst = Minecraft.class.getDeclaredField("minecraft");
-            inst.setAccessible(true);
-            return (Minecraft) inst.get(null);
-        } catch (Exception e) {
-            return null;
-        }
     }
 }

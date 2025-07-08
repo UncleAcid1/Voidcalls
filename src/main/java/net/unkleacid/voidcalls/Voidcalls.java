@@ -11,12 +11,11 @@ import net.modificationstation.stationapi.api.util.Null;
 import net.minecraft.item.Item;
 import net.unkleacid.voidcalls.entity.NotextureEntity;
 import net.unkleacid.voidcalls.entity.renderer.NotextureEntityRenderer;
-import net.unkleacid.voidcalls.entity.model.NotextureEntityModel;
 
 public class Voidcalls {
 
     @Entrypoint.Namespace
-    public static final Namespace NAMESPACE = Null.get();
+    public static Namespace NAMESPACE = Null.get();
 
     public static Item WEDDING_RING;
 

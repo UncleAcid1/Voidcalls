@@ -20,7 +20,6 @@ public class BiomeMixin {
     @SuppressWarnings("unchecked")
     @Inject(method = "<init>", at = @At("TAIL"))
     public void letWomenSpawnNaturally(CallbackInfo ci) {
-
         this.spawnablePassive.add(new EntitySpawnGroup(NotextureEntity.class, 10));
     }
 }
