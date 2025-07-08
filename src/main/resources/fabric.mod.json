@@ -10,7 +10,7 @@
   "environment": "*",
   "entrypoints": {
     "stationapi:event_bus": ["net.unkleacid.voidcalls.Voidcalls"],
-    "stationapi:event_bus_client": ["net.unkleacid.voidcalls.client.VoidCallsClient"],
+    "stationapi:event_bus_client": [],
     "stationapi:event_bus_server": []
   },
   "mixins": [ "voidcalls.mixins.json" ],
