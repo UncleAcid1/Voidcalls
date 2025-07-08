@@ -5,6 +5,7 @@ import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
+import net.minecraft.entity.player.PlayerEntity;
 
 public class NotextureEntity extends AnimalEntity {
 
@@ -14,12 +15,15 @@ public class NotextureEntity extends AnimalEntity {
     private int wanderTicks;
     private float wanderYaw;
 
+    private boolean helloPlayed = false;
+
     public NotextureEntity(World world) {
         super(world);
         this.texture = TEXTURE_PATH;
         this.maxHealth = 20;
         this.health = 20;
         this.stepHeight = 0.5F;
+        // Idle for 100–300 s at spawn
         this.wanderCooldown = 2000 + this.random.nextInt(4000);
     }
 
@@ -44,25 +48,28 @@ public class NotextureEntity extends AnimalEntity {
             }
         }
 
-        if (!this.onGround) {
-            this.velocityY -= 0.03;
-        } else {
-            this.velocityY = 0;
-        }
-
         this.move(this.velocityX, this.velocityY, this.velocityZ);
+
+        PlayerEntity player = this.world.getClosestPlayer(this, 7.0);
+        if (player != null) {
+            if (!helloPlayed) {
+                this.world.playSound(this.x, this.y, this.z, "voidcalls.hello", 1.0F, 1.0F);
+                helloPlayed = true;
+            }
+        } else {
+            helloPlayed = false;
+        }
     }
 
     @Override
     public boolean damage(Entity attacker, int amount) {
-        return false;
+        return false; // completely ignore all damage
     }
 
     @Override
     public void writeNbt(NbtCompound nbt) {
         super.writeNbt(nbt);
     }
-
     @Override
     public void readNbt(NbtCompound nbt) {
         super.readNbt(nbt);
