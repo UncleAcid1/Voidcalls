@@ -12,6 +12,7 @@ version = project.mod_version
 group = project.maven_group
 
 loom {
+    accessWidenerPath.set(file("src/main/resources/voidcalls.accesswidener"))
     customMinecraftManifest.set("https://babric.github.io/manifest-polyfill/${minecraft_version}.json")
     intermediaryUrl.set("https://maven.glass-launcher.net/babric/babric/intermediary/%1\$s/intermediary-%1\$s-v2.jar")
 }
