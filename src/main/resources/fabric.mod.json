@@ -13,7 +13,10 @@
     "stationapi:event_bus_client": [],
     "stationapi:event_bus_server": []
   },
+<<<<<<< HEAD
   "accessWidener": "voidcalls.accesswidener",
+=======
+>>>>>>> 5f5fff2 (broken stuff always breaking /:)
   "mixins": [ "voidcalls.mixins.json" ],
   "depends": {
     "minecraft": "1.0.0-beta.7.3"
