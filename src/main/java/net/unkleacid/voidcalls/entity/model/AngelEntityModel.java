@@ -12,8 +12,6 @@ public class AngelEntityModel extends EntityModel {
 
     public AngelEntityModel() {
         panel = new ModelPart(0, 0);
-        // Flat vertical plane: 64 wide, 128 tall, facing +Z
-        // Centered horizontally at X=0, vertically from Y=-64 to Y=64
         panel.addCuboid(-32F, -64F, 0F, 64, 128, 0, 0F);
         panel.setPivot(0F, 0F, 0F);
         panel.mirror = false;
@@ -28,6 +26,5 @@ public class AngelEntityModel extends EntityModel {
     @Override
     public void setAngles(float limbAngle, float limbDistance,
                           float ageInTicks, float netHeadYaw, float headPitch, float scale) {
-        // No animation or rotation
     }
 }

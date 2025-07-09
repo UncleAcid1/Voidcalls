@@ -17,12 +17,10 @@ public class AngelEntityRenderer extends LivingEntityRenderer {
     public void render(LivingEntity entity, double x, double y, double z, float yaw, float delta) {
         GL11.glPushMatrix();
 
-        // Move to the entity's position
         GL11.glTranslated(x, y, z);
 
-        // Apply fixed rotation to face forward (positive Z) and correct texture
-        GL11.glRotatef(180, 0, 1, 0); // Flip around Y if needed (texture faces camera)
-        GL11.glRotatef(-90F, 1F, 0F, 0F); // rotate so the flat plane faces +Z, not up
+        GL11.glRotatef(180, 0, 1, 0);
+        GL11.glRotatef(-90F, 1F, 0F, 0F);
 
 
 
