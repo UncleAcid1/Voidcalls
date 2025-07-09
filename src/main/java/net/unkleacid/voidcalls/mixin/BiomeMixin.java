@@ -17,9 +17,9 @@ public class BiomeMixin {
     @Shadow
     protected List spawnablePassive;
 
-    @SuppressWarnings("unchecked")
     @Inject(method = "<init>", at = @At("TAIL"))
-    public void letWomenSpawnNaturally(CallbackInfo ci) {
-        this.spawnablePassive.add(new EntitySpawnGroup(NotextureEntity.class, 10));
+    public void addNotextureSpawn(CallbackInfo ci) {
+        // Weight = 1 (rare), Min group = 1, Max group = 1
+        this.spawnablePassive.add(new EntitySpawnGroup(NotextureEntity.class, 1));
     }
 }

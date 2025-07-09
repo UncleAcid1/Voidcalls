@@ -8,21 +8,21 @@ import net.minecraft.util.math.MathHelper;
 
 @Environment(EnvType.CLIENT)
 public class NotextureEntityModel extends EntityModel {
-    public TropiModelPart body     = new TropiModelPart(0, 0);
+    public TropiModelPart body = new TropiModelPart(0, 0);
     public TropiModelPart rightArm = new TropiModelPart(0, 0);
-    public TropiModelPart leftArm  = new TropiModelPart(0, 0);
+    public TropiModelPart leftArm = new TropiModelPart(0, 0);
     public TropiModelPart rightLeg = new TropiModelPart(0, 0);
-    public TropiModelPart leftLeg  = new TropiModelPart(0, 0);
+    public TropiModelPart leftLeg = new TropiModelPart(0, 0);
 
-    public TropiModelPart h1  = new TropiModelPart(0, 0);
-    public TropiModelPart h2  = new TropiModelPart(0, 0);
-    public TropiModelPart h3  = new TropiModelPart(0, 0);
-    public TropiModelPart h4  = new TropiModelPart(0, 0);
-    public TropiModelPart h5  = new TropiModelPart(0, 0);
-    public TropiModelPart h6  = new TropiModelPart(0, 0);
-    public TropiModelPart h7  = new TropiModelPart(0, 0);
-    public TropiModelPart h8  = new TropiModelPart(0, 0);
-    public TropiModelPart h9  = new TropiModelPart(0, 0);
+    public TropiModelPart h1 = new TropiModelPart(0, 0);
+    public TropiModelPart h2 = new TropiModelPart(0, 0);
+    public TropiModelPart h3 = new TropiModelPart(0, 0);
+    public TropiModelPart h4 = new TropiModelPart(0, 0);
+    public TropiModelPart h5 = new TropiModelPart(0, 0);
+    public TropiModelPart h6 = new TropiModelPart(0, 0);
+    public TropiModelPart h7 = new TropiModelPart(0, 0);
+    public TropiModelPart h8 = new TropiModelPart(0, 0);
+    public TropiModelPart h9 = new TropiModelPart(0, 0);
     public TropiModelPart h10 = new TropiModelPart(0, 0);
     public TropiModelPart h11 = new TropiModelPart(0, 0);
     public TropiModelPart h12 = new TropiModelPart(0, 0);
@@ -45,29 +45,29 @@ public class NotextureEntityModel extends EntityModel {
         rightLeg.addCube(-0.1F, 0F, -2F, 4, 12, 4, -0.1F, 12F, -2F);
         leftLeg.addCube(-3.9F, 0F, -2F, 4, 12, 4, -3.9F, 12F, -2F);
 
-        h1 .addCube( 0F, 24F, -4F,  4,  7, 7, 0F, 24F, -4F);
-        h2 .addCube(-1F, 31F, -3F,  4,  1, 5, 0F, 31F, -3F);
-        h3 .addCube(-1F, 30F, -2F,  2,  5, 2, 0F, 30F, -2F);
-        h4 .addCube( 9.2132F,37.2659F,-1.1F,1,5,1,9.2132F,37.2659F,-1.1F);
-        h5 .addCube( 6.2372F,36.3005F,-1F,  1,5,1,6.2372F,36.3005F,-1F);
-        h6 .addCube( 3.6519F,32.2689F,-1.1F,1,5,1,3.6519F,32.2689F,-1.1F);
-        h7 .addCube( 3.9299F,28.3215F,-1F,  1,5,1,3.9299F,28.3215F,-1F);
-        h8 .addCube( 7.2132F,32.2689F,-9.1F,1,5,1,7.2132F,32.2689F,-9.1F);
-        h9 .addCube( 4.2372F,31.3005F,-9F,  1,5,1,4.2372F,31.3005F,-9F);
-        h10.addCube(1.6519F,27.2689F,-9.1F,1,5,1,1.6519F,27.2689F,-9.1F);
-        h11.addCube(4.9299F,23.3215F,-9F,  1,5,1,4.9299F,23.3215F,-9F);
-        h12.addCube(-1.7868F,48.2659F,-7.1F,1,5,1,-1.7868F,48.2659F,-7.1F);
-        h13.addCube(-4.7628F,47.3005F,-7F,  1,5,1,-4.7628F,47.3005F,-7F);
-        h14.addCube(-7.3481F,43.2689F,-7.1F,1,5,1,-7.3481F,43.2689F,-7.1F);
-        h15.addCube(-4.0701F,39.3215F,-7F,  1,5,1,-4.0701F,39.3215F,-7F);
-        h16.addCube(-3.7868F,39.2659F,-7.1F,1,5,1,-3.7868F,39.2659F,-7.1F);
-        h17.addCube(-6.7628F,38.3005F,-7F,  1,5,1,-6.7628F,38.3005F,-7F);
-        h18.addCube(-9.3481F,34.2689F,-7.1F,1,5,1,-9.3481F,34.2689F,-7.1F);
-        h19.addCube(-6.0701F,30.3215F,-7F,  1,5,1,-6.0701F,30.3215F,-7F);
-        h20.addCube(-7.0876F,38.4903F,-2.1F,2,5,2,-7.0876F,38.4903F,-2.1F);
-        h21.addCube(-7.1399F,35.0261F,-2F,  2,5,2,-7.1399F,35.0261F,-2F);
-        h22.addCube(0.7F,35.9F,-2.1F,       2,5,2,0.7F,35.9F,-2.1F);
-        h23.addCube(-4F,24F,0F,            4,4,4,-4F,24F,0F);
+        h1.addCube(0F, 24F, -4F, 4, 7, 7, 0F, 24F, -4F);
+        h2.addCube(-1F, 31F, -3F, 4, 1, 5, 0F, 31F, -3F);
+        h3.addCube(-1F, 30F, -2F, 2, 5, 2, 0F, 30F, -2F);
+        h4.addCube(9.2132F, 37.2659F, -1.1F, 1, 5, 1, 9.2132F, 37.2659F, -1.1F);
+        h5.addCube(6.2372F, 36.3005F, -1F, 1, 5, 1, 6.2372F, 36.3005F, -1F);
+        h6.addCube(3.6519F, 32.2689F, -1.1F, 1, 5, 1, 3.6519F, 32.2689F, -1.1F);
+        h7.addCube(3.9299F, 28.3215F, -1F, 1, 5, 1, 3.9299F, 28.3215F, -1F);
+        h8.addCube(7.2132F, 32.2689F, -9.1F, 1, 5, 1, 7.2132F, 32.2689F, -9.1F);
+        h9.addCube(4.2372F, 31.3005F, -9F, 1, 5, 1, 4.2372F, 31.3005F, -9F);
+        h10.addCube(1.6519F, 27.2689F, -9.1F, 1, 5, 1, 1.6519F, 27.2689F, -9.1F);
+        h11.addCube(4.9299F, 23.3215F, -9F, 1, 5, 1, 4.9299F, 23.3215F, -9F);
+        h12.addCube(-1.7868F, 48.2659F, -7.1F, 1, 5, 1, -1.7868F, 48.2659F, -7.1F);
+        h13.addCube(-4.7628F, 47.3005F, -7F, 1, 5, 1, -4.7628F, 47.3005F, -7F);
+        h14.addCube(-7.3481F, 43.2689F, -7.1F, 1, 5, 1, -7.3481F, 43.2689F, -7.1F);
+        h15.addCube(-4.0701F, 39.3215F, -7F, 1, 5, 1, -4.0701F, 39.3215F, -7F);
+        h16.addCube(-3.7868F, 39.2659F, -7.1F, 1, 5, 1, -3.7868F, 39.2659F, -7.1F);
+        h17.addCube(-6.7628F, 38.3005F, -7F, 1, 5, 1, -6.7628F, 38.3005F, -7F);
+        h18.addCube(-9.3481F, 34.2689F, -7.1F, 1, 5, 1, -9.3481F, 34.2689F, -7.1F);
+        h19.addCube(-6.0701F, 30.3215F, -7F, 1, 5, 1, -6.0701F, 30.3215F, -7F);
+        h20.addCube(-7.0876F, 38.4903F, -2.1F, 2, 5, 2, -7.0876F, 38.4903F, -2.1F);
+        h21.addCube(-7.1399F, 35.0261F, -2F, 2, 5, 2, -7.1399F, 35.0261F, -2F);
+        h22.addCube(0.7F, 35.9F, -2.1F, 2, 5, 2, 0.7F, 35.9F, -2.1F);
+        h23.addCube(-4F, 24F, 0F, 4, 4, 4, -4F, 24F, 0F);
     }
 
     @Override
@@ -78,12 +78,48 @@ public class NotextureEntityModel extends EntityModel {
         leftArm.render(scale);
         rightLeg.render(scale);
         leftLeg.render(scale);
-        h1.render(scale); h2.render(scale); h3.render(scale); h4.render(scale); h5.render(scale);
-        h6.render(scale); h7.render(scale); h8.render(scale); h9.render(scale); h10.render(scale);
-        h11.render(scale); h12.render(scale); h13.render(scale); h14.render(scale); h15.render(scale);
-        h16.render(scale); h17.render(scale); h18.render(scale); h19.render(scale);
-        h20.render(scale); h21.render(scale); h22.render(scale); h23.render(scale);
+        h1.render(scale);
+        h2.render(scale);
+        h3.render(scale);
+        h4.render(scale);
+        h5.render(scale);
+        h6.render(scale);
+        h7.render(scale);
+        h8.render(scale);
+        h9.render(scale);
+        h10.render(scale);
+        h11.render(scale);
+        h12.render(scale);
+        h13.render(scale);
+        h14.render(scale);
+        h15.render(scale);
+        h16.render(scale);
+        h17.render(scale);
+        h18.render(scale);
+        h19.render(scale);
+        h20.render(scale);
+        h21.render(scale);
+        h22.render(scale);
+        h23.render(scale);
     }
+
+    @Override
+    public void animateModel(LivingEntity e, float limbAngle, float limbDistance, float tickDelta) {
+        float jitterX = (e.age % 3 - 1) * 0.01F;
+        float jitterY = (e.age % 5 - 2) * 0.01F;
+
+        TropiModelPart[] heads = {
+                h1, h2, h3, h4, h5, h6, h7, h8, h9, h10,
+                h11, h12, h13, h14, h15, h16, h17, h18, h19,
+                h20, h21, h22, h23
+        };
+
+        for (TropiModelPart part : heads) {
+            part.pitch = jitterX;
+            part.yaw = jitterY;
+        }
+    }
+
 
     @Override
     public void setAngles(float limbAngle, float limbDistance, float animProgress,
@@ -117,9 +153,5 @@ public class NotextureEntityModel extends EntityModel {
         h21.angleHead(headPitch, headYaw);
         h22.angleHead(headPitch, headYaw);
         h23.angleHead(headPitch, headYaw);
-    }
-
-    @Override
-    public void animateModel(LivingEntity e, float limbAngle, float limbDistance, float tickDelta) {
     }
 }
