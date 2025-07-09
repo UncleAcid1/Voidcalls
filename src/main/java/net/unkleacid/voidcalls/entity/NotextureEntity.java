@@ -40,7 +40,6 @@ public class NotextureEntity extends AnimalEntity {
     public void tick() {
         super.tick();
         PlayerEntity player = this.world.getClosestPlayer(this, 7.0);
-        // phase transition
         if (player != null) {
             if (phase == 0) {
                 phase = 1;

@@ -11,7 +11,9 @@ import net.modificationstation.stationapi.api.event.registry.BlockRegistryEvent;
 import net.modificationstation.stationapi.api.mod.entrypoint.Entrypoint;
 import net.modificationstation.stationapi.api.util.Namespace;
 import net.unkleacid.voidcalls.block.ErrTextureBlock;
+import net.unkleacid.voidcalls.entity.AngelEntity;
 import net.unkleacid.voidcalls.entity.NotextureEntity;
+import net.unkleacid.voidcalls.entity.renderer.AngelEntityRenderer;
 import net.unkleacid.voidcalls.entity.renderer.NotextureEntityRenderer;
 
 @Entrypoint
@@ -30,17 +32,24 @@ public class Voidcalls {
 
     @EventListener
     public void registerEntities(EntityRegister event) {
+        // Register both custom entities
         event.register(NotextureEntity.class, "notexture");
+        event.register(AngelEntity.class,    "angel");
     }
 
     @EventListener
     public void registerEntityRenderers(EntityRendererRegisterEvent event) {
+        // Bind renderers for both entities
         event.renderers.put(NotextureEntity.class, new NotextureEntityRenderer());
+        event.renderers.put(AngelEntity.class,    new AngelEntityRenderer());
     }
 
     @EventListener
     public void onTextureRegister(TextureRegisterEvent event) {
         ExpandableAtlas atlas = Atlases.getTerrain();
+        // Ensure block and entity textures are loaded
         atlas.addTexture(NAMESPACE.id("err_texture"));
+        atlas.addTexture(NAMESPACE.id("angel"));
+        atlas.addTexture(NAMESPACE.id("notexture"));
     }
 }
