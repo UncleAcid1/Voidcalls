@@ -1,9 +1,5 @@
 package net.unkleacid.voidcalls.client;
 
-<<<<<<< HEAD
-=======
-import net.fabricmc.loader.api.FabricLoader;
->>>>>>> 5f5fff2 (broken stuff always breaking /:)
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
@@ -18,7 +14,6 @@ public final class VoidCallsClient {
 
     private static boolean helloPlayed = false;
 
-<<<<<<< HEAD
     private static Field soundManagerField;
     private static Method playSoundMethod;
 
@@ -38,63 +33,10 @@ public final class VoidCallsClient {
                 helloPlayed = true;
             }
         } else {
-=======
-    private static Field worldField, playerField, cameraField, soundManagerField;
-    private static Method playSoundMethod;
-
-    public static void onClientGameTick() {
-        Object game = FabricLoader.getInstance().getGameInstance();
-        if (!(game instanceof Minecraft mc)) return;
-
-        World worldObj = (World) getFirstFieldOfType(mc, World.class);
-        Entity rawPlayer = (Entity) getFirstFieldOfType(mc, LivingEntity.class);
-        if (!(rawPlayer instanceof LivingEntity player) || worldObj == null) return;
-
-        NotextureEntity closest = findClosest(worldObj, player, 7.0);
-
-        if (closest != null) {
-            setCamera(mc, closest);
-            if (!helloPlayed) {
-                playHello(mc, closest);
-                helloPlayed = true;
-            }
-        } else {
-            setCamera(mc, player);
->>>>>>> 5f5fff2 (broken stuff always breaking /:)
             helloPlayed = false;
         }
     }
 
-<<<<<<< HEAD
-=======
-    private static Object getFirstFieldOfType(Object instance, Class<?> type) {
-        for (Field f : instance.getClass().getDeclaredFields()) {
-            if (type.isAssignableFrom(f.getType())) {
-                f.setAccessible(true);
-                try { return f.get(instance); } catch (IllegalAccessException ignored) {}
-            }
-        }
-        return null;
-    }
-
-    private static void setCamera(Minecraft mc, LivingEntity target) {
-        if (cameraField == null) {
-            for (Field f : mc.getClass().getDeclaredFields()) {
-                if (LivingEntity.class.isAssignableFrom(f.getType())
-                        && !f.getName().equalsIgnoreCase("thePlayer")) {
-                    f.setAccessible(true);
-                    cameraField = f;
-                    break;
-                }
-            }
-        }
-        if (cameraField != null) {
-            try { cameraField.set(mc, target); }
-            catch (IllegalAccessException ignored) {}
-        }
-    }
-
->>>>>>> 5f5fff2 (broken stuff always breaking /:)
     private static void playHello(Minecraft mc, NotextureEntity e) {
         if (soundManagerField == null) {
             for (Field f : mc.getClass().getDeclaredFields()) {
@@ -112,13 +54,9 @@ public final class VoidCallsClient {
             if (playSoundMethod == null) {
                 for (Method m : sndMgr.getClass().getDeclaredMethods()) {
                     Class<?>[] p = m.getParameterTypes();
-<<<<<<< HEAD
                     if (p.length == 6
                             && p[0] == String.class
                             && p[1] == float.class) {
-=======
-                    if (p.length == 6 && p[0] == String.class && p[1] == float.class) {
->>>>>>> 5f5fff2 (broken stuff always breaking /:)
                         m.setAccessible(true);
                         playSoundMethod = m;
                         break;
@@ -129,7 +67,6 @@ public final class VoidCallsClient {
                 playSoundMethod.invoke(
                         sndMgr,
                         "voidcalls.hello",
-<<<<<<< HEAD
                         (float) e.x, (float) e.y, (float) e.z,
                         1.0F, 1.0F
                 );
@@ -156,29 +93,5 @@ public final class VoidCallsClient {
             }
         }
         return closest;
-=======
-                        (float)e.x, (float)e.y, (float)e.z,
-                        1.0F, 1.0F
-                );
-            }
-        } catch (Throwable ignored) {}
-    }
-
-    private static NotextureEntity findClosest(World worldObj, LivingEntity player, double maxDist) {
-        double maxSq = maxDist * maxDist;
-        NotextureEntity best = null;
-        @SuppressWarnings("unchecked")
-        List<Entity> list = (List<Entity>) worldObj.entities;
-        for (Entity ent : list) {
-            if (ent instanceof NotextureEntity ne) {
-                double dx = ent.x - player.x;
-                double dy = ent.y - player.y;
-                double dz = ent.z - player.z;
-                double distSq = dx*dx + dy*dy + dz*dz;
-                if (distSq < maxSq) { maxSq = distSq; best = ne; }
-            }
-        }
-        return best;
->>>>>>> 5f5fff2 (broken stuff always breaking /:)
     }
 }

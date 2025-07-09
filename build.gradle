@@ -12,10 +12,7 @@ version = project.mod_version
 group = project.maven_group
 
 loom {
-<<<<<<< HEAD
     accessWidenerPath.set(file("src/main/resources/voidcalls.accesswidener"))
-=======
->>>>>>> 5f5fff2 (broken stuff always breaking /:)
     customMinecraftManifest.set("https://babric.github.io/manifest-polyfill/${minecraft_version}.json")
     intermediaryUrl.set("https://maven.glass-launcher.net/babric/babric/intermediary/%1\$s/intermediary-%1\$s-v2.jar")
 }
