@@ -20,7 +20,7 @@ public class AngelEntityRenderer extends LivingEntityRenderer {
         GL11.glTranslated(x, y, z);
 
         GL11.glRotatef(-this.dispatcher.yaw, 0.0F, 1.0F, 0.0F);
-        GL11.glRotatef(this.dispatcher.pitch, 1.0F, 0.0F, 0.0F);
+        GL11.glRotatef(90F,0.0F, 0.0F, -1.0F);
 
 
 
