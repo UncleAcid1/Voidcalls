@@ -1,8 +1,9 @@
 package net.unkleacid.voidcalls.mixin;
 
-import net.unkleacid.voidcalls.entity.NotextureEntity;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.EntitySpawnGroup;
+import net.unkleacid.voidcalls.entity.AngelEntity;
+import net.unkleacid.voidcalls.entity.NotextureEntity;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -18,8 +19,8 @@ public class BiomeMixin {
     protected List spawnablePassive;
 
     @Inject(method = "<init>", at = @At("TAIL"))
-    public void addNotextureSpawn(CallbackInfo ci) {
-        // Weight = 1 (rare), Min group = 1, Max group = 1
+    public void addVoidcallsSpawns(CallbackInfo ci) {
         this.spawnablePassive.add(new EntitySpawnGroup(NotextureEntity.class, 1));
+        this.spawnablePassive.add(new EntitySpawnGroup(AngelEntity.class, 1));
     }
 }

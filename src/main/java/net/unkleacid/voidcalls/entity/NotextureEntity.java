@@ -1,44 +1,56 @@
 package net.unkleacid.voidcalls.entity;
 
-import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.network.packet.Packet;
+import net.minecraft.network.packet.s2c.play.EntitySpawnS2CPacket;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3i;
 import net.minecraft.world.World;
+import net.modificationstation.stationapi.api.network.packet.MessagePacket;
+import net.modificationstation.stationapi.api.server.entity.StationSpawnDataProvider;
+import net.modificationstation.stationapi.api.server.entity.HasTrackingParameters;
+import net.modificationstation.stationapi.api.util.Identifier;
+import net.modificationstation.stationapi.api.util.TriState;
 import net.unkleacid.voidcalls.Voidcalls;
 
 import java.util.Random;
 
-public class NotextureEntity extends AnimalEntity {
+@SuppressWarnings("UnnecessaryBoxing")
+@HasTrackingParameters(updatePeriod = 4, sendVelocity = TriState.TRUE, trackingDistance = 30)
+public class NotextureEntity extends AnimalEntity implements StationSpawnDataProvider {
 
     private static final String TEXTURE_PATH = "/assets/voidcalls/stationapi/textures/entity/notexture.png";
 
     private int wanderCooldown, wanderTicks;
     private float wanderYaw;
-
-    private int phase          = 0;  // 0=wander, 1=stare, 2=chase
-    private int stareTicks     = 0;
-    private int chaseTicks     = 0;
-
+    private int phase = 0;
+    private int stareTicks = 0;
+    private int chaseTicks = 0;
     private int teleportCooldown = 0;
     private boolean warningSoundPlaying = false;
-
     private int placeBlockTimer = 0;
 
     public NotextureEntity(World world) {
         super(world);
-        this.texture      = TEXTURE_PATH;
-        this.maxHealth    = 20;
-        this.health       = 20;
-        this.stepHeight   = 1.0F;  // let it naturally step up blocks
+        this.texture = TEXTURE_PATH;
+        this.maxHealth = 20;
+        this.health = 20;
+        this.stepHeight = 1.0F;
         this.wanderCooldown = 2000 + this.random.nextInt(4000);
     }
+
+    public NotextureEntity(World world, Double x, Double y, Double z) {
+        this(world);
+        this.setPosition(x, y, z);
+    }
+
     @Override
     public void tick() {
         super.tick();
+
         PlayerEntity player = this.world.getClosestPlayer(this, 7.0);
         if (player != null) {
             if (phase == 0) {
@@ -50,6 +62,7 @@ public class NotextureEntity extends AnimalEntity {
             stareTicks = chaseTicks = 0;
             warningSoundPlaying = false;
         }
+
         if (phase == 0) {
             chaseTicks = 0;
             wanderBehavior();
@@ -65,6 +78,7 @@ public class NotextureEntity extends AnimalEntity {
             chaseTicks++;
             chaseBehavior(player);
         }
+
         if (!world.isRemote) {
             if (++placeBlockTimer >= 40) {
                 placeBlockTimer = 0;
@@ -85,7 +99,7 @@ public class NotextureEntity extends AnimalEntity {
             double speed = 0.0025;
             float rad = (float) Math.toRadians(wanderYaw);
             this.velocityX = -MathHelper.sin(rad) * speed;
-            this.velocityZ =  MathHelper.cos(rad) * speed;
+            this.velocityZ = MathHelper.cos(rad) * speed;
             this.yaw = this.bodyYaw = this.prevYaw = wanderYaw;
             wanderTicks--;
         } else {
@@ -113,7 +127,7 @@ public class NotextureEntity extends AnimalEntity {
             this.world.playSound(this.x, this.y, this.z, "voidcalls:lightning", 0.7F, 0.6F);
         }
 
-        double distSq = dx*dx + (player.y - this.y)*(player.y - this.y) + dz*dz;
+        double distSq = dx * dx + (player.y - this.y) * (player.y - this.y) + dz * dz;
         if (distSq < 0.25 && teleportCooldown <= 0) {
             Vec3i sp = player.getSpawnPos();
             if (sp != null) {
@@ -147,11 +161,11 @@ public class NotextureEntity extends AnimalEntity {
         int r = 3;
         int sx = MathHelper.floor(this.x), sy = MathHelper.floor(this.y), sz = MathHelper.floor(this.z);
         for (int i = 0; i < 10; i++) {
-            int x = sx + rnd.nextInt(r*2+1) - r;
-            int y = sy + rnd.nextInt(r*2+1) - r;
-            int z = sz + rnd.nextInt(r*2+1) - r;
-            if (world.getBlockId(x,y,z) == 0) {
-                world.setBlock(x,y,z, Voidcalls.ERR_TEXTURE_BLOCK.id);
+            int x = sx + rnd.nextInt(r * 2 + 1) - r;
+            int y = sy + rnd.nextInt(r * 2 + 1) - r;
+            int z = sz + rnd.nextInt(r * 2 + 1) - r;
+            if (world.getBlockId(x, y, z) == 0) {
+                world.setBlock(x, y, z, Voidcalls.ERR_TEXTURE_BLOCK.id);
                 return;
             }
         }
@@ -192,15 +206,33 @@ public class NotextureEntity extends AnimalEntity {
     @Override
     public void readNbt(NbtCompound nbt) {
         super.readNbt(nbt);
-        wanderCooldown        = nbt.getInt("wanderCooldown");
-        wanderTicks           = nbt.getInt("wanderTicks");
-        wanderYaw             = nbt.getFloat("wanderYaw");
-        phase                 = nbt.getInt("phase");
-        stareTicks            = nbt.getInt("stareTicks");
-        chaseTicks            = nbt.getInt("chaseTicks");
-        teleportCooldown      = nbt.getInt("teleportCooldown");
-        warningSoundPlaying   = nbt.getBoolean("warningSoundPlaying");
-        placeBlockTimer       = nbt.getInt("placeBlockTimer");
+        wanderCooldown = nbt.getInt("wanderCooldown");
+        wanderTicks = nbt.getInt("wanderTicks");
+        wanderYaw = nbt.getFloat("wanderYaw");
+        phase = nbt.getInt("phase");
+        stareTicks = nbt.getInt("stareTicks");
+        chaseTicks = nbt.getInt("chaseTicks");
+        teleportCooldown = nbt.getInt("teleportCooldown");
+        warningSoundPlaying = nbt.getBoolean("warningSoundPlaying");
+        placeBlockTimer = nbt.getInt("placeBlockTimer");
+    }
+
+    @Override
+    public void writeToMessage(MessagePacket message) {
+    }
+
+    @Override
+    public void readFromMessage(MessagePacket message) {
+    }
+
+    @Override
+    public Identifier getHandlerIdentifier() {
+        return Voidcalls.NAMESPACE.id("notexture");
+    }
+
+    @Override
+    public Packet getSpawnData() {
+        return new EntitySpawnS2CPacket(this, this.id);
     }
 
     @Override protected String getRandomSound() { return null; }
