@@ -10,7 +10,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3i;
 import net.minecraft.world.World;
 import net.modificationstation.stationapi.api.network.packet.MessagePacket;
-import net.modificationstation.stationapi.api.server.entity.StationSpawnDataProvider;
+import net.modificationstation.stationapi.api.server.entity.MobSpawnDataProvider;
 import net.modificationstation.stationapi.api.server.entity.HasTrackingParameters;
 import net.modificationstation.stationapi.api.util.Identifier;
 import net.modificationstation.stationapi.api.util.TriState;
@@ -18,9 +18,8 @@ import net.unkleacid.voidcalls.Voidcalls;
 
 import java.util.Random;
 
-@SuppressWarnings("UnnecessaryBoxing")
 @HasTrackingParameters(updatePeriod = 4, sendVelocity = TriState.TRUE, trackingDistance = 30)
-public class NotextureEntity extends AnimalEntity implements StationSpawnDataProvider {
+public class NotextureEntity extends AnimalEntity implements MobSpawnDataProvider {
 
     private static final String TEXTURE_PATH = "/assets/voidcalls/stationapi/textures/entity/notexture.png";
 

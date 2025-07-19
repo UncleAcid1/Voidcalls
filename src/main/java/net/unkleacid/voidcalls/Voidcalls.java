@@ -11,6 +11,7 @@ import net.unkleacid.voidcalls.block.ErrTextureBlock;
 import net.unkleacid.voidcalls.entity.AngelEntity;
 import net.unkleacid.voidcalls.entity.NotextureEntity;
 import net.modificationstation.stationapi.api.event.registry.EntityHandlerRegistryEvent;
+import net.modificationstation.stationapi.api.event.registry.MobHandlerRegistryEvent;
 
 @Entrypoint
 public class Voidcalls {
@@ -33,7 +34,7 @@ public class Voidcalls {
     }
 
     @EventListener
-    public void registerEntityHandlers(EntityHandlerRegistryEvent event) {
+    public void registerMobHandlers(MobHandlerRegistryEvent event) {
         Registry.register(event.registry, NAMESPACE.id("angel"), AngelEntity::new);
         Registry.register(event.registry, NAMESPACE.id("notexture"), NotextureEntity::new);
     }
