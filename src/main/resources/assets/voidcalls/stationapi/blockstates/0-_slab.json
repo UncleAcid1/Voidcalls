@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "slab_type=bottom": {
+      "model": "voidcalls:block/0-_slab"
+    },
+
+    "slab_type=top": {
+      "model": "voidcalls:block/0-_slab",
+      "x": 180
+    },
+
+    "slab_type=double": {
+      "model": "voidcalls:block/0-"
+    }
+  }
+}

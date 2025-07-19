@@ -37,6 +37,7 @@ public class AngelEntity extends AnimalEntity implements MobSpawnDataProvider {
         this.stepHeight = 3.0F;
         this.setBoundingBoxSpacing(1.0F, 3.0F);
         this.wanderCooldown = 2000 + this.random.nextInt(4000);
+        this.fireImmune = true;
     }
 
     public AngelEntity(World world, Double x, Double y, Double z) {
@@ -48,7 +49,7 @@ public class AngelEntity extends AnimalEntity implements MobSpawnDataProvider {
     public void tick() {
         super.tick();
 
-        PlayerEntity closest = this.world.getClosestPlayer(this, 12.0);
+        PlayerEntity closest = this.world.getClosestPlayer(this, 28.0);
         if (closest != null) {
             if (phase == 0) {
                 phase = 1;

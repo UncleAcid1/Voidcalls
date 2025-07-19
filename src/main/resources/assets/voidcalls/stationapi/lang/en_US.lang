@@ -2,3 +2,12 @@ tile.voidcalls.err_texture.name=err.texture
 tile.voidcalls.0-.name=0-
 tile.voidcalls.contained.adminspace.name=contained.adminspace
 tile.voidcalls.contained.adminspace.light.name=contained.adminspace.light
+
+tile.voidcalls.0-_slab.name=0- Slab
+tile.voidcalls.0-_stairs.name=0- Stairs
+
+tile.voidcalls.contained.adminspace_slab.name=Admin Space Slab
+tile.voidcalls.contained.adminspace_stairs.name=Admin Space Stairs
+
+tile.voidcalls.contained.adminspace.light_slab.name=Admin Space Light Slab
+tile.voidcalls.contained.adminspace.light_stairs.name=Admin Space Light Stairs

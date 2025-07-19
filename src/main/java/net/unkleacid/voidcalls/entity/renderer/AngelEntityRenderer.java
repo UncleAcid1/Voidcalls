@@ -16,8 +16,8 @@ public class AngelEntityRenderer extends LivingEntityRenderer {
 
     @Override
     public void render(LivingEntity entity, double x, double y, double z, float yaw, float delta) {
-        GL11.glPushMatrix();
 
+        GL11.glPushMatrix();
         GL11.glTranslated(x, y + entity.height * -0.1D, z);
         GL11.glRotatef(-this.dispatcher.yaw, 0F, 1F, 0F);
         GL11.glRotatef(90F, 0F, 0F, -1F);
@@ -32,7 +32,6 @@ public class AngelEntityRenderer extends LivingEntityRenderer {
 
         GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_WRAP_S, GL11.GL_REPEAT);
         GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_WRAP_T, GL11.GL_REPEAT);
-
         GL11.glPopMatrix();
 
         this.renderNameTag(entity, x, y + entity.height, z);

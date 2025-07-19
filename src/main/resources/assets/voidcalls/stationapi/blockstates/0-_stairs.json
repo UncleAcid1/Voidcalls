@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "voidcalls:block/0-_stairs"
+    },
+    "facing=east": {
+      "model": "voidcalls:block/0-_stairs",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "voidcalls:block/0-_stairs",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "voidcalls:block/0-_stairs",
+      "y": 270
+    }
+  }
+}
