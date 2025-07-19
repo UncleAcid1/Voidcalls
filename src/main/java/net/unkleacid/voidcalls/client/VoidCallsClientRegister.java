@@ -27,6 +27,9 @@ public class VoidCallsClientRegister {
         atlas.addTexture(NAMESPACE.id("angel"));
         atlas.addTexture(NAMESPACE.id("notexture"));
         atlas.addTexture(NAMESPACE.id("err_texture"));
+        atlas.addTexture(NAMESPACE.id("0-"));
+        atlas.addTexture(NAMESPACE.id("contained.adminspace"));
+        atlas.addTexture(NAMESPACE.id("contained.adminspace.light"));
     }
 
     @EventListener

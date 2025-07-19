@@ -1,0 +1,6 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "voidcalls:block/contained.adminspace.light"
+  }
+}

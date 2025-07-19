@@ -1,2 +1,4 @@
-item.@.wedding_ring.name=Wedding Ring
 tile.voidcalls.err_texture.name=err.texture
+tile.voidcalls.0-.name=0-
+tile.voidcalls.contained.adminspace.name=contained.adminspace
+tile.voidcalls.contained.adminspace.light.name=contained.adminspace.light
