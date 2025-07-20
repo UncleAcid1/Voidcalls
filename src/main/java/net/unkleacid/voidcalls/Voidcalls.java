@@ -20,6 +20,7 @@ import net.unkleacid.voidcalls.entity.AngelEntity;
 import net.unkleacid.voidcalls.entity.NotextureEntity;
 import net.unkleacid.voidcalls.dimension.SolitudeDimension;
 import net.unkleacid.voidcalls.block.AdminspaceEntryBlock;
+import net.unkleacid.voidcalls.block.SolitudeReturnBlock;
 
 
 @Entrypoint
@@ -29,6 +30,7 @@ public class Voidcalls {
     public static Namespace NAMESPACE;
 
     public static Block SOLITUDEPORTAL;
+    public static Block SOLITUDERETURNPORTAL;
     public static Block ADMINSPACEPORTAL;
     public static Block ERR_TEXTURE_BLOCK;
     public static Block GLOWING_OBSIDIAN_BLOCK;
@@ -45,6 +47,8 @@ public class Voidcalls {
     public void registerBlocks(BlockRegistryEvent event) {
         SOLITUDEPORTAL = new SolitudeBlock(NAMESPACE.id("1010101010"))
                 .setTranslationKey(NAMESPACE, "1010101010");
+        SOLITUDERETURNPORTAL = new SolitudeReturnBlock(NAMESPACE.id("LEAVE"))
+                .setTranslationKey(NAMESPACE, "LEAVE");
         ADMINSPACEPORTAL = new AdminspaceEntryBlock(NAMESPACE.id("null"))
                 .setTranslationKey(NAMESPACE, "null");
         //ERR_TEXTURE_BLOCK CODE :3

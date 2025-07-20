@@ -5,7 +5,7 @@ import net.fabricmc.api.Environment;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.world.World;
-import net.minecraft.world.dimension.PortalForcer;
+import net.unkleacid.voidcalls.teleport.NoCreatePortalForcer;
 import net.modificationstation.stationapi.api.block.CustomPortal;
 import net.modificationstation.stationapi.api.template.block.TemplateBlock;
 import net.modificationstation.stationapi.api.util.Identifier;
@@ -29,8 +29,8 @@ public class SolitudeBlock extends TemplateBlock implements CustomPortal {
     }
 
     @Override
-    public PortalForcer getTravelAgent(PlayerEntity playerEntity) {
-        return new PortalForcer();
+    public NoCreatePortalForcer getTravelAgent(PlayerEntity playerEntity) {
+        return new NoCreatePortalForcer();
     }
 
     @Override
