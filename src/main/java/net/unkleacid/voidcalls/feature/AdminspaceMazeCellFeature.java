@@ -16,7 +16,7 @@ public class AdminspaceMazeCellFeature extends Feature {
 
     // Kiki, you can change these
     public static final int CELL_SIZE = 5; // interior size, excludes wall of thickness 1
-    public static final int WALL_HEIGHT = 4;
+    public static final int WALL_HEIGHT = 45;
 
     public static final int WALL_BLOCK_ID = Voidcalls.ADMINSPACE_BLOCK.id;
     public static final int FLOOR_BLOCK_ID = Voidcalls.ADMINSPACE_BLOCK.id;

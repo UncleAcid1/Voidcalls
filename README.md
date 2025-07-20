@@ -6,9 +6,9 @@ Inspired by Mark101.
 
 Inspired by The Broken Script by Wendigodripp.
 
-Thank you to Dany for creating the Tropicraft Models and Rendering system!
+Thank you to Dany for letting me use Tropimodel and Tropimodelrenderer, which helped greatly in the process of adding in custom entity models. And also NyaLib which allowed me to make multiple things function on multiplayer!
 
-Thank you to Dairycultist for fixing my dog-ass code!
+An absolutely huge thank you to Dairycultist who is responsible for implementing Adminspace, and whose advisement in this mod also has kept me trying to develop it!
 
 ![alt text](https://github.com/UncleAcid1/Voidcalls/blob/main/banner.jpg)
 
@@ -18,13 +18,13 @@ Thank you to Dairycultist for fixing my dog-ass code!
 
 ## Entities
 
-### Notexture
+### Notexture (DONE!)
 
 -Model/Textures (done? A little buggy, im gonna beg Dany to help me understand Tropimodels.)
 
 -Animations (done)
 
--AI mechanics (unfinished and broken.) Will be a neutral mob. Will chase and lock onto you if you get too close.
+-AI mechanics (Finished, except for taking you to solitude.)
 
 -Ghost no texture blocks that spawn randomly in the air.
 
@@ -34,7 +34,7 @@ Thank you to Dairycultist for fixing my dog-ass code!
 
 -Will despawn at noon everyday.
 
-### Subjugate/Integrity
+### Subjugate/Integrity (UNIMPLEMENTED)
 
 -Model/Textures (W.I.P. Textures, possible workaround for 64x32 limit to make a faithful integrity texture being brainstormed.)
 
@@ -50,7 +50,7 @@ Thank you to Dairycultist for fixing my dog-ass code!
 
 -Can escape by letting it be agro for 14 seconds and have it not kill you or anyone else, it will then disappear.
 
-### Fuse
+### Fuse (UNIMPLEMENTED)
 
 -Model/Textures (Unimplemented but finished)
 
@@ -62,7 +62,7 @@ Thank you to Dairycultist for fixing my dog-ass code!
 
 -Will never despawn until you look a it.
 
-### Null
+### Null (UNIMPLEMENTED)
 
 -Model/Textures (Unimplemented but finished)
 
@@ -76,7 +76,7 @@ Thank you to Dairycultist for fixing my dog-ass code!
 
 -Will disappear if damaged in any way.
 
-### Angel
+### Angel (DONE! :D)
 
 -Model/Textures (Same issue as Integrity/Subjugate)
 
@@ -90,7 +90,7 @@ Thank you to Dairycultist for fixing my dog-ass code!
 
 -Will never disappear until you survive by being chased for 30 seconds or die in its chase.
 
-### Herobrine
+### Herobrine (UNIMPLEMENTED)
 
 -Easter egg
 
@@ -100,7 +100,7 @@ Thank you to Dairycultist for fixing my dog-ass code!
 
 -Will not move or hurt the player, will disappear 4 seconds after the player touches it hitbox. Will follow the eyes of the player.
 
-### Fake Markus
+### Fake Markus (UNIMPLEMENTED)
 
 -Steve model that has been hue'd a little black.
 
@@ -112,13 +112,13 @@ Thank you to Dairycultist for fixing my dog-ass code!
 
 -Never despawns.
 
-### Duck
+### Duck (UNIMPLEMENTED)
 
 -Secretttt :3
 
 
 
-## Basic mechanics
+## Basic mechanics 
 
 -The only way to damage entities is using explosive arrows from Elemental Arrows as a soft dependency, without the mod it is impossible to fight them and you must learn to evade them effectively.
 
@@ -132,7 +132,7 @@ Thank you to Dairycultist for fixing my dog-ass code!
 
 
 
-## Blocks
+## Blocks (Done, but with quirks)
 
 -adminspace block, unbreakable except for explosions.
 
@@ -142,11 +142,10 @@ Thank you to Dairycultist for fixing my dog-ass code!
 
 -err.integrity block, which is adminspace block with err on it.
 
--err.soil block, which is the only block in Solitude. Functionally, dirt.
 
 
+## Sounds (Mostly done.)
 
-## Sounds
 
 All sounds are W.I.P. but are original except for the moon error, which is from the mark101 ARG.
 
@@ -166,17 +165,20 @@ All sounds are W.I.P. but are original except for the moon error, which is from 
 
 -Occasionally, a red stone torch will be placed next to a players spawn anchor, finding the nearest air block.
 
--Occasionally, the player will be sent to a maze dimension made entirely out of adminspace and adminspace.light blocks. TBD.
+-Occasionally, the player will be sent to a maze dimension made entirely out of adminspace and adminspace.light blocks. DONE HAHAHAH TY CULTIST :D
+
+-Occasionally, a large chunk of notexture blocks will spawn in the sky.
+
+-Occasionally, chat messages (client only, maybe?) will appear on your screen.
 
 ## Dimensions
 
--Solitude
+-Solitude (done!)
 
 ![alt text](https://github.com/UncleAcid1/Voidcalls/blob/main/solitude.jpg)
 
--Adminspace(?)
+-Adminspace (done!)
 
-
-
+![alt text](https://github.com/UncleAcid1/Voidcalls/blob/main/adminspace.jpg)
 
 -------------------------
