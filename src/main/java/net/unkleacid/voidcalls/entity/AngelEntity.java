@@ -1,5 +1,6 @@
 package net.unkleacid.voidcalls.entity;
 
+import net.danygames2014.nyalib.sound.SoundHelper;
 import net.minecraft.entity.LightningEntity;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -10,7 +11,6 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.modificationstation.stationapi.api.network.packet.MessagePacket;
 import net.modificationstation.stationapi.api.server.entity.MobSpawnDataProvider;
-import net.modificationstation.stationapi.api.server.entity.StationSpawnDataProvider;
 import net.modificationstation.stationapi.api.server.entity.HasTrackingParameters;
 import net.modificationstation.stationapi.api.util.Identifier;
 import net.modificationstation.stationapi.api.util.TriState;
@@ -24,7 +24,7 @@ public class AngelEntity extends AnimalEntity implements MobSpawnDataProvider {
 
     private int wanderCooldown, wanderTicks;
     private float wanderYaw;
-    private int phase = 0;      // 0 = wander, 1 = stare, 2 = chase
+    private int phase = 0;
     private int stareTicks = 0;
     private int chaseTicks = 0;
     private int lightningTrailCooldown = 0;
@@ -81,7 +81,7 @@ public class AngelEntity extends AnimalEntity implements MobSpawnDataProvider {
                 if (obj instanceof PlayerEntity player) {
                     if (player.boundingBox.intersects(this.boundingBox)) {
                         player.damage(this, 69);
-                        this.world.playSound(this.x, this.y, this.z, "voidcalls:chaseend", 1.0F, 1.0F);
+                        SoundHelper.playSound(world, MathHelper.floor(x), MathHelper.floor(y), MathHelper.floor(z), "voidcalls:chaseend", 1.0F, 1.0F);
                         this.damage(this, 420);
                     }
                 }
@@ -124,13 +124,13 @@ public class AngelEntity extends AnimalEntity implements MobSpawnDataProvider {
         float angle = (float) (Math.toDegrees(Math.atan2(dz, dx)) - 90);
         wanderYaw = angle;
         float rad = (float) Math.toRadians(wanderYaw);
-        this.velocityX = -MathHelper.sin(rad) * 0.19;
-        this.velocityZ = MathHelper.cos(rad) * 0.19;
+        this.velocityX = -MathHelper.sin(rad) * 0.3;
+        this.velocityZ = MathHelper.cos(rad) * 0.3;
         this.yaw = this.bodyYaw = this.prevYaw = wanderYaw;
 
         if (!world.isRemote) {
             lightningTrailCooldown++;
-            if (lightningTrailCooldown >= 15) {
+            if (lightningTrailCooldown >= 45) {
                 lightningTrailCooldown = 0;
                 LightningEntity bolt = new LightningEntity(world, this.x, this.y, this.z);
                 world.spawnEntity(bolt);
@@ -138,7 +138,7 @@ public class AngelEntity extends AnimalEntity implements MobSpawnDataProvider {
         }
 
         if (chaseTicks < 1000 && chaseTicks % 3 == 0) {
-            this.world.playSound(this.x, this.y, this.z, "voidcalls:lightning", 0.7F, 0.6F);
+            SoundHelper.playSound(world, MathHelper.floor(x), MathHelper.floor(y), MathHelper.floor(z), "voidcalls:lightning", 0.9F, 0.4F);
         }
     }
 
@@ -187,7 +187,6 @@ public class AngelEntity extends AnimalEntity implements MobSpawnDataProvider {
     protected String getDeathSound() {
         return null;
     }
-
 
     @Override
     public void writeToMessage(MessagePacket message) {

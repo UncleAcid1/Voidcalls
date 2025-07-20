@@ -26,16 +26,6 @@ public class VoidCallsClientRegister {
         ExpandableAtlas atlas = Atlases.getTerrain();
         atlas.addTexture(NAMESPACE.id("angel"));
         atlas.addTexture(NAMESPACE.id("notexture"));
-        atlas.addTexture(NAMESPACE.id("err_texture"));
-        atlas.addTexture(NAMESPACE.id("glowing_obsidian"));
-        atlas.addTexture(NAMESPACE.id("glowing_obsidian_slab"));
-        atlas.addTexture(NAMESPACE.id("glowing_obsidian_stairs"));
-        atlas.addTexture(NAMESPACE.id("contained.adminspace"));
-        atlas.addTexture(NAMESPACE.id("contained.adminspace_slab"));
-        atlas.addTexture(NAMESPACE.id("contained.adminspace_stairs"));
-        atlas.addTexture(NAMESPACE.id("contained.adminspace.light"));
-        atlas.addTexture(NAMESPACE.id("contained.adminspace.light_slab"));
-        atlas.addTexture(NAMESPACE.id("contained.adminspace.light_stairs"));
     }
 
     @EventListener

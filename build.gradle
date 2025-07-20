@@ -117,6 +117,10 @@ dependencies {
     modImplementation("net.danygames2014:spawneggs:${project.spawneggs_version}") {
         transitive false
     }
+
+    modImplementation("net.danygames2014:NyaLib:0.13.0") {
+        transitive false
+    }
 }
 
 processResources {

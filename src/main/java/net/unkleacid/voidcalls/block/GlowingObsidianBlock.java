@@ -10,7 +10,7 @@ public class GlowingObsidianBlock extends TemplateBlock {
         super(id, Material.STONE);
         this.setTranslationKey(id.toString());
         this.setOpacity(1);
-        this.setLuminance(0.2F);
+        this.setLuminance(1F);
         this.setHardness(4.0F);
         this.setBoundingBox(0, 0, 0, 1, 1, 1);
         this.setTickRandomly(true);

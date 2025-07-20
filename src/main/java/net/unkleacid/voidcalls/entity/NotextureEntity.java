@@ -1,5 +1,6 @@
 package net.unkleacid.voidcalls.entity;
 
+import net.danygames2014.nyalib.sound.SoundHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -118,15 +119,20 @@ public class NotextureEntity extends AnimalEntity implements MobSpawnDataProvide
         this.wanderYaw = angle;
         float rad = (float) Math.toRadians(wanderYaw);
         this.velocityX = -MathHelper.sin(rad) * 0.1;
-        this.velocityZ =  MathHelper.cos(rad) * 0.1;
+        this.velocityZ = MathHelper.cos(rad) * 0.1;
         this.yaw = this.bodyYaw = this.prevYaw = wanderYaw;
         wanderTicks = 1;
 
+        // floor entity pos to block coords
+        int bx = MathHelper.floor(this.x);
+        int by = MathHelper.floor(this.y);
+        int bz = MathHelper.floor(this.z);
+
         if (chaseTicks < 100 && chaseTicks % 3 == 0) {
-            this.world.playSound(this.x, this.y, this.z, "voidcalls:lightning", 0.7F, 0.6F);
+            SoundHelper.playSound(world, x, y, z, "voidcalls:lightning", 0.7F, 0.6F);
         }
 
-        double distSq = dx * dx + (player.y - this.y) * (player.y - this.y) + dz * dz;
+        double distSq = dx*dx + (player.y - this.y)*(player.y - this.y) + dz*dz;
         if (distSq < 0.25 && teleportCooldown <= 0) {
             Vec3i sp = player.getSpawnPos();
             if (sp != null) {
@@ -136,7 +142,7 @@ public class NotextureEntity extends AnimalEntity implements MobSpawnDataProvide
         }
 
         if (chaseTicks == 82) {
-            this.world.playSound(this.x, this.y, this.z, "voidcalls:hello", 1.0F, 1.0F);
+            SoundHelper.playSound(world, x, y, z, "voidcalls:hello", 1.0F, 1.0F);
         }
 
         if (chaseTicks >= 102) {
@@ -160,11 +166,11 @@ public class NotextureEntity extends AnimalEntity implements MobSpawnDataProvide
         int r = 3;
         int sx = MathHelper.floor(this.x), sy = MathHelper.floor(this.y), sz = MathHelper.floor(this.z);
         for (int i = 0; i < 10; i++) {
-            int x = sx + rnd.nextInt(r * 2 + 1) - r;
-            int y = sy + rnd.nextInt(r * 2 + 1) - r;
-            int z = sz + rnd.nextInt(r * 2 + 1) - r;
-            if (world.getBlockId(x, y, z) == 0) {
-                world.setBlock(x, y, z, Voidcalls.ERR_TEXTURE_BLOCK.id);
+            int xx = sx + rnd.nextInt(r*2+1) - r;
+            int yy = sy + rnd.nextInt(r*2+1) - r;
+            int zz = sz + rnd.nextInt(r*2+1) - r;
+            if (world.getBlockId(xx,yy,zz) == 0) {
+                world.setBlock(xx,yy,zz, Voidcalls.ERR_TEXTURE_BLOCK.id);
                 return;
             }
         }
@@ -185,7 +191,7 @@ public class NotextureEntity extends AnimalEntity implements MobSpawnDataProvide
                 MathHelper.floor(this.x),
                 MathHelper.floor(this.y),
                 MathHelper.floor(this.z)
-        ) && this.random.nextInt(100) == 0; // 1% chance
+        ) && this.random.nextInt(100) == 0;
     }
 
     @Override
@@ -205,24 +211,19 @@ public class NotextureEntity extends AnimalEntity implements MobSpawnDataProvide
     @Override
     public void readNbt(NbtCompound nbt) {
         super.readNbt(nbt);
-        wanderCooldown = nbt.getInt("wanderCooldown");
-        wanderTicks = nbt.getInt("wanderTicks");
-        wanderYaw = nbt.getFloat("wanderYaw");
-        phase = nbt.getInt("phase");
-        stareTicks = nbt.getInt("stareTicks");
-        chaseTicks = nbt.getInt("chaseTicks");
-        teleportCooldown = nbt.getInt("teleportCooldown");
-        warningSoundPlaying = nbt.getBoolean("warningSoundPlaying");
-        placeBlockTimer = nbt.getInt("placeBlockTimer");
+        wanderCooldown        = nbt.getInt("wanderCooldown");
+        wanderTicks           = nbt.getInt("wanderTicks");
+        wanderYaw             = nbt.getFloat("wanderYaw");
+        phase                 = nbt.getInt("phase");
+        stareTicks            = nbt.getInt("stareTicks");
+        chaseTicks            = nbt.getInt("chaseTicks");
+        teleportCooldown      = nbt.getInt("teleportCooldown");
+        warningSoundPlaying   = nbt.getBoolean("warningSoundPlaying");
+        placeBlockTimer       = nbt.getInt("placeBlockTimer");
     }
 
-    @Override
-    public void writeToMessage(MessagePacket message) {
-    }
-
-    @Override
-    public void readFromMessage(MessagePacket message) {
-    }
+    @Override public void writeToMessage(MessagePacket message) {}
+    @Override public void readFromMessage(MessagePacket message) {}
 
     @Override
     public Identifier getHandlerIdentifier() {

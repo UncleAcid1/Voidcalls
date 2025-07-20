@@ -2,21 +2,22 @@ package net.unkleacid.voidcalls;
 
 import net.mine_diver.unsafeevents.listener.EventListener;
 import net.minecraft.block.Block;
+import net.minecraft.world.dimension.Dimension;
 import net.modificationstation.stationapi.api.event.entity.EntityRegister;
 import net.modificationstation.stationapi.api.event.registry.BlockRegistryEvent;
+import net.modificationstation.stationapi.api.event.registry.DimensionRegistryEvent;
 import net.modificationstation.stationapi.api.event.registry.MobHandlerRegistryEvent;
 import net.modificationstation.stationapi.api.mod.entrypoint.Entrypoint;
+import net.modificationstation.stationapi.api.registry.DimensionContainer;
 import net.modificationstation.stationapi.api.registry.Registry;
-import net.modificationstation.stationapi.api.template.block.TemplateBlock;
+import net.modificationstation.stationapi.api.util.Identifier;
+import net.unkleacid.voidcalls.block.*;
 import net.unkleacid.voidcalls.block.template.SlabBlockTemplate;
 import net.unkleacid.voidcalls.block.template.StairsBlockTemplate;
 import net.modificationstation.stationapi.api.util.Namespace;
-import net.unkleacid.voidcalls.block.AdminSpaceBlock;
-import net.unkleacid.voidcalls.block.AdminSpaceLightBlock;
-import net.unkleacid.voidcalls.block.GlowingObsidianBlock;
-import net.unkleacid.voidcalls.block.ErrTextureBlock;
 import net.unkleacid.voidcalls.entity.AngelEntity;
 import net.unkleacid.voidcalls.entity.NotextureEntity;
+import net.unkleacid.voidcalls.dimension.SolitudeDimension;
 
 @Entrypoint
 public class Voidcalls {
@@ -24,6 +25,7 @@ public class Voidcalls {
     @Entrypoint.Namespace
     public static Namespace NAMESPACE;
 
+    public static Block SOLITUDEPORTAL;
     public static Block ERR_TEXTURE_BLOCK;
     public static Block GLOWING_OBSIDIAN_BLOCK;
     public static Block GLOWING_OBSIDIAN_SLAB;
@@ -37,6 +39,8 @@ public class Voidcalls {
 
     @EventListener
     public void registerBlocks(BlockRegistryEvent event) {
+        SOLITUDEPORTAL = new SolitudeBlock(NAMESPACE.id("1010101010"))
+                .setTranslationKey(NAMESPACE, "1010101010");
         //ERR_TEXTURE_BLOCK CODE :3
         ERR_TEXTURE_BLOCK = new ErrTextureBlock(NAMESPACE.id("err_texture"))
                 .setTranslationKey(NAMESPACE, "err_texture");
@@ -104,5 +108,10 @@ public class Voidcalls {
     public void registerMobHandlers(MobHandlerRegistryEvent event) {
         Registry.register(event.registry, NAMESPACE.id("angel"),    AngelEntity::new);
         Registry.register(event.registry, NAMESPACE.id("notexture"), NotextureEntity::new);
+    }
+
+    @EventListener
+    public void registerDimensions(DimensionRegistryEvent event){
+        event.registry.register(Identifier.of(NAMESPACE, "Solitude"), new DimensionContainer<Dimension>(SolitudeDimension::new));
     }
 }
