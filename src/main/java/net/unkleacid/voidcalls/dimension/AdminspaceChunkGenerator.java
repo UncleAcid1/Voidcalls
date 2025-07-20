@@ -11,9 +11,16 @@ import net.unkleacid.voidcalls.Voidcalls;
 
 public class AdminspaceChunkGenerator implements ChunkSource {
 
+    // Kiki, you can change these
     private static final int CELL_SIZE = 5; // interior size, excludes wall of thickness 1
-    private static final int CELL_SIZE_PLUS_WALL = CELL_SIZE + 1;
     private static final int WALL_HEIGHT = 4;
+
+    private static final int WALL_BLOCK_ID = Block.DIAMOND_BLOCK.id;
+    private static final int FLOOR_BLOCK_ID = Voidcalls.ADMINSPACE_BLOCK.id;
+    private static final int LIGHT_BLOCK_ID = Voidcalls.ADMINSPACE_LIGHT_BLOCK.id;
+
+    // Kiki, you CANNOT change anything below this
+    private static final int CELL_SIZE_PLUS_WALL = CELL_SIZE + 1;
 
     private final World world;
 
@@ -139,22 +146,22 @@ public class AdminspaceChunkGenerator implements ChunkSource {
         // walls
         for (int i = 0; i < CELL_SIZE_PLUS_WALL; i++) {
 
-            world.setBlockWithoutNotifyingNeighbors(cellX + i, 1, cellZ, Block.DIAMOND_BLOCK.id);
-            world.setBlockWithoutNotifyingNeighbors(cellX, 1, cellZ + i, Block.DIAMOND_BLOCK.id);
+            world.setBlockWithoutNotifyingNeighbors(cellX + i, 1, cellZ, WALL_BLOCK_ID);
+            world.setBlockWithoutNotifyingNeighbors(cellX, 1, cellZ + i, WALL_BLOCK_ID);
         }
 
         // floor
         for (int x = 0; x < CELL_SIZE_PLUS_WALL; x++) {
             for (int z = 0; z < CELL_SIZE_PLUS_WALL; z++) {
 
-                world.setBlockWithoutNotifyingNeighbors(cellX + x, 0, cellZ + z, Voidcalls.ADMINSPACE_BLOCK.id);
+                world.setBlockWithoutNotifyingNeighbors(cellX + x, 0, cellZ + z, FLOOR_BLOCK_ID);
             }
         }
 
         // lights
-        world.setBlock(cellX + 3, 0, cellZ + 3, Voidcalls.ADMINSPACE_LIGHT_BLOCK.id);
-        world.setBlock(cellX + 3, 0, cellZ, Voidcalls.ADMINSPACE_LIGHT_BLOCK.id);
-        world.setBlock(cellX, 0, cellZ + 3, Voidcalls.ADMINSPACE_LIGHT_BLOCK.id);
+        world.setBlock(cellX + 3, 0, cellZ + 3, LIGHT_BLOCK_ID);
+        world.setBlock(cellX + 3, 0, cellZ, LIGHT_BLOCK_ID);
+        world.setBlock(cellX, 0, cellZ + 3, LIGHT_BLOCK_ID);
     }
 
     // note from Dairycultist: something tells me these should be implemented, like, better
