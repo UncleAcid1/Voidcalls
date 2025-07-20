@@ -8,6 +8,8 @@ Inspired by The Broken Script by Wendigodripp.
 
 Thank you to Dany for creating the Tropicraft Models and Rendering system!
 
+Thank you to Dairycultist for fixing my dog-ass code!
+
 ![alt text](https://github.com/UncleAcid1/Voidcalls/blob/main/banner.jpg)
 
 # Todo list below!

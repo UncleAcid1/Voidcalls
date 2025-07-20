@@ -2,6 +2,7 @@ package net.unkleacid.voidcalls.dimension;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.minecraft.block.Block;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.ChunkSource;
@@ -9,88 +10,88 @@ import net.modificationstation.stationapi.impl.world.chunk.FlattenedChunk;
 import net.unkleacid.voidcalls.Voidcalls;
 
 public class AdminspaceChunkGenerator implements ChunkSource {
-    private static final int CELL_SIZE = 5;
+
+    private static final int CELL_SIZE = 5; // interior size, excludes wall of thickness 1
+    private static final int CELL_SIZE_PLUS_WALL = CELL_SIZE + 1;
     private static final int WALL_HEIGHT = 4;
+
     private final World world;
-    private static Maze maze = null;
 
-    public AdminspaceChunkGenerator(World world, long seed, int mazeWidth, int mazeHeight) {
+    public AdminspaceChunkGenerator(World world) {
+
         this.world = world;
-        if (maze == null) {
-            long start = System.currentTimeMillis();
-            maze = new Maze(mazeWidth, mazeHeight, seed);
-            System.out.println("Maze generated in " + (System.currentTimeMillis() - start) + "ms");
-        }
-        this.maze = maze;
     }
-
 
     @Override
     public Chunk getChunk(int chunkX, int chunkZ) {
-        if (chunkX < 0 || chunkZ < 0 || chunkX >= maze.width || chunkZ >= maze.height) {
-            return emptyChunk(chunkX, chunkZ);
-        }
 
+        // initialize every chunk to be completely empty
+        // (except for a bedrock floor for testing convenience)
         byte[] blocks = new byte[16 * 128 * 16];
-        Chunk chunk = new Chunk(world, blocks, chunkX, chunkZ);
 
-        int offX = (16 - CELL_SIZE) / 2;
-        int offZ = (16 - CELL_SIZE) / 2;
+        for (int i=0; i<blocks.length; i += 128)
+            blocks[i] = (byte) Block.BEDROCK.id;
 
-        for (int x = 0; x < CELL_SIZE; x++) {
-            for (int z = 0; z < CELL_SIZE; z++) {
-                int globalIdx = ((offX + x) * 128 + 0) * 16 + (offZ + z);
-                boolean inMiddleThird = (x >= CELL_SIZE/3 && x < CELL_SIZE*2/3);
-                if (inMiddleThird && (z % 2 == 0)) {
-                    blocks[globalIdx] = (byte) Voidcalls.ADMINSPACE_LIGHT_BLOCK.id;
-                } else {
-                    blocks[globalIdx] = (byte) Voidcalls.ADMINSPACE_BLOCK.id;
-                }
+        FlattenedChunk empty = new FlattenedChunk(world, chunkX, chunkZ);
+        empty.fromLegacy(blocks);
+        empty.populateHeightMap();
+
+        return empty;
+    }
+
+//function generateCel(x, z) {
+//
+//    for all 4 walls of this cel {
+//
+//        step outside of the wall
+//
+//        if that area isn't generated yet {
+//            stop
+//        } else {
+//
+//            wander around randomly for 10 steps
+//
+//            if at any point we step back into the cel at x,z {
+//                don't place a door on this wall
+//            } else {
+//                place a door on this wall
+//            }
+//        }
+//    }
+//}
+
+    @Override
+    public void decorate(ChunkSource src, int chunkX, int chunkZ) {
+
+        chunkX *= 16;
+        chunkZ *= 16;
+
+        // cell position is misaligned with chunks (since they're different sizes) so calculate
+        // every cell whose origin (corner) is within this chunk
+        // (the algorithm is kinda scuffed but it's ok)
+        for (int x = chunkX + (CELL_SIZE_PLUS_WALL - (chunkX % CELL_SIZE_PLUS_WALL)) % CELL_SIZE_PLUS_WALL; x < chunkX + 16; x += CELL_SIZE_PLUS_WALL) {
+            for (int z = chunkZ + (CELL_SIZE_PLUS_WALL - (chunkZ % CELL_SIZE_PLUS_WALL)) % CELL_SIZE_PLUS_WALL; z < chunkZ + 16; z += CELL_SIZE_PLUS_WALL) {
+
+                placeWalledCell(x, z);
+
+                // TODO perform door-placing algorithm
             }
         }
-
-        buildWall(blocks, offX, offZ, maze.southOpen[chunkX][chunkZ], true);
-        buildWall(blocks, offX, offZ + CELL_SIZE - 1,
-                chunkZ > 0 && maze.southOpen[chunkX][chunkZ - 1], true);
-        buildWall(blocks, offX, offZ, maze.eastOpen[chunkX][chunkZ], false);
-        buildWall(blocks, offX + CELL_SIZE - 1, offZ,
-                chunkX > 0 && maze.eastOpen[chunkX - 1][chunkZ], false);
-
-        chunk.populateHeightMap();
-        FlattenedChunk flat = new FlattenedChunk(world, chunkX, chunkZ);
-        flat.fromLegacy(blocks);
-        flat.populateHeightMap();
-        return flat;
     }
 
-    private void buildWall(byte[] blocks, int ox, int oz, boolean hasDoor, boolean horizontal) {
-        int doorPos    = CELL_SIZE / 2;
-        int doorHeight = 2;
-        for (int h = 1; h <= WALL_HEIGHT; h++) {
-            for (int i = 0; i < CELL_SIZE; i++) {
-                if (hasDoor && i == doorPos && h <= doorHeight) {
-                    continue;
-                }
-                int x = horizontal ? ox + i : ox;
-                int z = horizontal ? oz : oz + i;
-                int idx = (x * 128 + h) * 16 + z;
-                blocks[idx] = (byte) Voidcalls.ADMINSPACE_BLOCK.id;
+    private void placeWalledCell(int originX, int originZ) {
+
+        for (int x = 1; x < CELL_SIZE; x++) {
+            for (int z = 1; z < CELL_SIZE; z++) {
+
+                world.setBlock(originX + x, 64, originZ + z, Voidcalls.ADMINSPACE_BLOCK.id);
             }
         }
     }
 
-    private Chunk emptyChunk(int cx, int cz) {
-        byte[] blocks = new byte[16 * 128 * 16];
-        Chunk chunk = new Chunk(world, blocks, cx, cz);
-        FlattenedChunk flat = new FlattenedChunk(world, cx, cz);
-        flat.fromLegacy(blocks);
-        flat.populateHeightMap();
-        return flat;
-    }
-
+    // note from Dairycultist: something tells me these should be implemented, like, better
     @Override public Chunk loadChunk(int x, int z) { return getChunk(x, z); }
     @Override public boolean isChunkLoaded(int x, int z) { return true; }
-    @Override public void decorate(ChunkSource src, int x, int z) { }
     @Override public boolean save(boolean a, net.minecraft.client.gui.screen.LoadingDisplay d) { return true; }
     @Override public boolean tick() { return false; }
     @Override public boolean canSave() { return true; }
