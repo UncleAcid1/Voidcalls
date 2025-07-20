@@ -15,9 +15,12 @@ import net.unkleacid.voidcalls.block.*;
 import net.unkleacid.voidcalls.block.template.SlabBlockTemplate;
 import net.unkleacid.voidcalls.block.template.StairsBlockTemplate;
 import net.modificationstation.stationapi.api.util.Namespace;
+import net.unkleacid.voidcalls.dimension.AdminspaceDimension;
 import net.unkleacid.voidcalls.entity.AngelEntity;
 import net.unkleacid.voidcalls.entity.NotextureEntity;
 import net.unkleacid.voidcalls.dimension.SolitudeDimension;
+import net.unkleacid.voidcalls.block.AdminspaceEntryBlock;
+
 
 @Entrypoint
 public class Voidcalls {
@@ -26,6 +29,7 @@ public class Voidcalls {
     public static Namespace NAMESPACE;
 
     public static Block SOLITUDEPORTAL;
+    public static Block ADMINSPACEPORTAL;
     public static Block ERR_TEXTURE_BLOCK;
     public static Block GLOWING_OBSIDIAN_BLOCK;
     public static Block GLOWING_OBSIDIAN_SLAB;
@@ -41,6 +45,8 @@ public class Voidcalls {
     public void registerBlocks(BlockRegistryEvent event) {
         SOLITUDEPORTAL = new SolitudeBlock(NAMESPACE.id("1010101010"))
                 .setTranslationKey(NAMESPACE, "1010101010");
+        ADMINSPACEPORTAL = new AdminspaceEntryBlock(NAMESPACE.id("null"))
+                .setTranslationKey(NAMESPACE, "null");
         //ERR_TEXTURE_BLOCK CODE :3
         ERR_TEXTURE_BLOCK = new ErrTextureBlock(NAMESPACE.id("err_texture"))
                 .setTranslationKey(NAMESPACE, "err_texture");
@@ -62,6 +68,7 @@ public class Voidcalls {
                 .setTranslationKey(NAMESPACE, "0-_stairs")
                 .setHardness(4.0F)
                 .setLuminance(0.2F);
+
         //GOOFYGRAY ADMINSPACE BLOCK SET
         ADMINSPACE_BLOCK = new AdminSpaceBlock(NAMESPACE.id("contained.adminspace"))
                 .setTranslationKey(NAMESPACE, "contained.adminspace");
@@ -79,6 +86,7 @@ public class Voidcalls {
                 .setTranslationKey(NAMESPACE, "contained.adminspace_stairs")
                 .setHardness(80.0F)
                 .setLuminance(0.0F);
+
         //ADMINSPACE BLOCKS BUT THEY GLOW :O
         ADMINSPACE_LIGHT_BLOCK = new AdminSpaceLightBlock(NAMESPACE.id("contained.adminspace.light"))
                 .setTranslationKey(NAMESPACE, "contained.adminspace.light");
@@ -112,6 +120,14 @@ public class Voidcalls {
 
     @EventListener
     public void registerDimensions(DimensionRegistryEvent event){
-        event.registry.register(Identifier.of(NAMESPACE, "Solitude"), new DimensionContainer<Dimension>(SolitudeDimension::new));
+        event.registry.register(
+                Identifier.of(NAMESPACE, "Solitude"),
+                new DimensionContainer<>(SolitudeDimension::new)
+        );
+
+        event.registry.register(
+                Identifier.of(NAMESPACE, "adminspace"),
+                new DimensionContainer<>(AdminspaceDimension::new)
+        );
     }
 }
