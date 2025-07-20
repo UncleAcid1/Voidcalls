@@ -26,20 +26,10 @@ public class AdminspaceChunkGenerator implements ChunkSource {
     public Chunk getChunk(int chunkX, int chunkZ) {
 
         // initialize every chunk to be completely empty
-        // (except for a bedrock floor for testing convenience)
-        byte[] blocks = new byte[16 * 128 * 16];
-
-        for (int i=0; i<blocks.length; i += 128)
-            blocks[i] = (byte) Block.BEDROCK.id;
-
-        FlattenedChunk empty = new FlattenedChunk(world, chunkX, chunkZ);
-        empty.fromLegacy(blocks);
-        empty.populateHeightMap();
-
-        return empty;
+        return new FlattenedChunk(world, chunkX, chunkZ);
     }
 
-//function generateCel(x, z) {
+//function generateCell(x, z) {
 //
 //    for all 4 walls of this cel {
 //
@@ -81,12 +71,25 @@ public class AdminspaceChunkGenerator implements ChunkSource {
 
     private void placeWalledCell(int originX, int originZ) {
 
-        for (int x = 1; x < CELL_SIZE; x++) {
-            for (int z = 1; z < CELL_SIZE; z++) {
+        // walls
+        for (int i = 0; i < CELL_SIZE_PLUS_WALL; i++) {
 
-                world.setBlock(originX + x, 64, originZ + z, Voidcalls.ADMINSPACE_BLOCK.id);
+            world.setBlockWithoutNotifyingNeighbors(originX + i, 1, originZ, Voidcalls.ADMINSPACE_BLOCK.id);
+            world.setBlockWithoutNotifyingNeighbors(originX, 1, originZ + i, Voidcalls.ADMINSPACE_BLOCK.id);
+        }
+
+        // floor
+        for (int x = 0; x < CELL_SIZE_PLUS_WALL; x++) {
+            for (int z = 0; z < CELL_SIZE_PLUS_WALL; z++) {
+
+                world.setBlockWithoutNotifyingNeighbors(originX + x, 0, originZ + z, Voidcalls.ADMINSPACE_BLOCK.id);
             }
         }
+
+        // lights
+        world.setBlock(originX + 3, 0, originZ + 3, Voidcalls.ADMINSPACE_LIGHT_BLOCK.id);
+        world.setBlock(originX + 3, 0, originZ, Voidcalls.ADMINSPACE_LIGHT_BLOCK.id);
+        world.setBlock(originX, 0, originZ + 3, Voidcalls.ADMINSPACE_LIGHT_BLOCK.id);
     }
 
     // note from Dairycultist: something tells me these should be implemented, like, better
