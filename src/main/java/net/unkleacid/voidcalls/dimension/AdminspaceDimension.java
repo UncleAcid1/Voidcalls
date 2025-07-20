@@ -10,7 +10,7 @@ public class AdminspaceDimension extends Dimension {
 
     @Override
     public ChunkSource createChunkGenerator() {
-        return new AdminspaceChunkGenerator(world, this.world.getSeed(), 1, 1);
+        return new AdminspaceChunkGenerator(world);
     }
 
     @Override
