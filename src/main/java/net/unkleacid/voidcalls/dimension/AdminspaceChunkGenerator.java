@@ -30,7 +30,7 @@ public class AdminspaceChunkGenerator implements ChunkSource {
     }
 
 //    basically we're trying to connect regions which aren't already connected by placing doors on the current cel
-//    we walk around to test their connectedness, which doesn't gaurantee they're not connected but that's not really necessary for a maze anyways
+//    we walk around to test their connectedness, which doesn't guarantee they're not connected but that's not really necessary for a maze anyways
 //    means the maze will have loops which is honestly a feature not a bug so
 
 //function generateCell(x, z) {
@@ -70,16 +70,16 @@ public class AdminspaceChunkGenerator implements ChunkSource {
 
                 // perform door-placing algorithm
                 // step outside every wall, checking if we can navigate back. if not, place a door
-                if (tryDiscoverCellFrom(x, z, x - 1, z, 10))
+                if (!hasNegXDoor(x, z) && tryDiscoverCellFrom(x, z, x - 1, z, 10))
                     placeNegXDoor(x, z);
 
-                if (tryDiscoverCellFrom(x, z, x + 1, z, 10))
+                if (!hasPosXDoor(x, z) && tryDiscoverCellFrom(x, z, x + 1, z, 10))
                     placePosXDoor(x, z);
 
-                if (tryDiscoverCellFrom(x, z, x, z - 1, 10))
+                if (!hasNegZDoor(x, z) && tryDiscoverCellFrom(x, z, x, z - 1, 10))
                     placeNegZDoor(x, z);
 
-                if (tryDiscoverCellFrom(x, z, x, z + 1, 10))
+                if (!hasPosZDoor(x, z) && tryDiscoverCellFrom(x, z, x, z + 1, 10))
                     placePosZDoor(x, z);
             }
         }
@@ -92,6 +92,26 @@ public class AdminspaceChunkGenerator implements ChunkSource {
             return false;
 
         return Math.random() > 0.5;
+    }
+
+    private boolean hasNegXDoor(int cellX, int cellZ) {
+
+        return world.getBlockId(cellX, 1, cellZ + 1) == 0;
+    }
+
+    private boolean hasPosXDoor(int cellX, int cellZ) {
+
+        return world.getBlockId(cellX + CELL_SIZE_PLUS_WALL, 1, cellZ + 1) == 0;
+    }
+
+    private boolean hasNegZDoor(int cellX, int cellZ) {
+
+        return world.getBlockId(cellX + 1, 1, cellZ) == 0;
+    }
+
+    private boolean hasPosZDoor(int cellX, int cellZ) {
+
+        return world.getBlockId(cellX + 1, 1, cellZ + CELL_SIZE_PLUS_WALL) == 0;
     }
 
     private void placeNegXDoor(int cellX, int cellZ) {
