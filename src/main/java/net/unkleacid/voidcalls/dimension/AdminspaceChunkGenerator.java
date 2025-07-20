@@ -29,6 +29,10 @@ public class AdminspaceChunkGenerator implements ChunkSource {
         return new FlattenedChunk(world, chunkX, chunkZ);
     }
 
+//    basically we're trying to connect regions which aren't already connected by placing doors on the current cel
+//    we walk around to test their connectedness, which doesn't gaurantee they're not connected but that's not really necessary for a maze anyways
+//    means the maze will have loops which is honestly a feature not a bug so
+
 //function generateCell(x, z) {
 //
 //    for all 4 walls of this cel {
@@ -64,32 +68,73 @@ public class AdminspaceChunkGenerator implements ChunkSource {
 
                 placeWalledCell(x, z);
 
-                // TODO perform door-placing algorithm
+                // perform door-placing algorithm
+                // step outside every wall, checking if we can navigate back. if not, place a door
+                if (tryDiscoverCellFrom(x, z, x - 1, z, 10))
+                    placeNegXDoor(x, z);
+
+                if (tryDiscoverCellFrom(x, z, x + 1, z, 10))
+                    placePosXDoor(x, z);
+
+                if (tryDiscoverCellFrom(x, z, x, z - 1, 10))
+                    placeNegZDoor(x, z);
+
+                if (tryDiscoverCellFrom(x, z, x, z + 1, 10))
+                    placePosZDoor(x, z);
             }
         }
     }
 
-    private void placeWalledCell(int originX, int originZ) {
+    private boolean tryDiscoverCellFrom(int cellX, int cellZ, int fromX, int fromZ, int maxSteps) {
+
+        // area isn't generated yet
+        if (world.getBlockId(fromX, 0, fromZ) == 0)
+            return false;
+
+        return Math.random() > 0.5;
+    }
+
+    private void placeNegXDoor(int cellX, int cellZ) {
+
+        for (int i = 1; i < CELL_SIZE_PLUS_WALL; i++)
+            world.setBlockWithoutNotifyingNeighbors(cellX, 1, cellZ + i, 0);
+    }
+
+    private void placePosXDoor(int cellX, int cellZ) {
+        placeNegXDoor(cellX + CELL_SIZE_PLUS_WALL, cellZ);
+    }
+
+    private void placeNegZDoor(int cellX, int cellZ) {
+
+        for (int i = 1; i < CELL_SIZE_PLUS_WALL; i++)
+            world.setBlockWithoutNotifyingNeighbors(cellX + i, 1, cellZ, 0);
+    }
+
+    private void placePosZDoor(int cellX, int cellZ) {
+        placeNegZDoor(cellX + CELL_SIZE_PLUS_WALL, cellZ);
+    }
+
+    private void placeWalledCell(int cellX, int cellZ) {
 
         // walls
         for (int i = 0; i < CELL_SIZE_PLUS_WALL; i++) {
 
-            world.setBlockWithoutNotifyingNeighbors(originX + i, 1, originZ, Voidcalls.ADMINSPACE_BLOCK.id);
-            world.setBlockWithoutNotifyingNeighbors(originX, 1, originZ + i, Voidcalls.ADMINSPACE_BLOCK.id);
+            world.setBlockWithoutNotifyingNeighbors(cellX + i, 1, cellZ, Block.DIAMOND_BLOCK.id);
+            world.setBlockWithoutNotifyingNeighbors(cellX, 1, cellZ + i, Block.DIAMOND_BLOCK.id);
         }
 
         // floor
         for (int x = 0; x < CELL_SIZE_PLUS_WALL; x++) {
             for (int z = 0; z < CELL_SIZE_PLUS_WALL; z++) {
 
-                world.setBlockWithoutNotifyingNeighbors(originX + x, 0, originZ + z, Voidcalls.ADMINSPACE_BLOCK.id);
+                world.setBlockWithoutNotifyingNeighbors(cellX + x, 0, cellZ + z, Voidcalls.ADMINSPACE_BLOCK.id);
             }
         }
 
         // lights
-        world.setBlock(originX + 3, 0, originZ + 3, Voidcalls.ADMINSPACE_LIGHT_BLOCK.id);
-        world.setBlock(originX + 3, 0, originZ, Voidcalls.ADMINSPACE_LIGHT_BLOCK.id);
-        world.setBlock(originX, 0, originZ + 3, Voidcalls.ADMINSPACE_LIGHT_BLOCK.id);
+        world.setBlock(cellX + 3, 0, cellZ + 3, Voidcalls.ADMINSPACE_LIGHT_BLOCK.id);
+        world.setBlock(cellX + 3, 0, cellZ, Voidcalls.ADMINSPACE_LIGHT_BLOCK.id);
+        world.setBlock(cellX, 0, cellZ + 3, Voidcalls.ADMINSPACE_LIGHT_BLOCK.id);
     }
 
     // note from Dairycultist: something tells me these should be implemented, like, better
