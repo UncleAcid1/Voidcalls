@@ -9,11 +9,16 @@ import java.util.Random;
 
 public class AdminspaceMazeCellFeature extends Feature {
 
+    // TODO
+    // 1) more connected/sophisticated maze generation
+    // 2) make it so you don't spawn from a portal
+    // 3) make it so you spawn inside the maze instead of on top
+
     // Kiki, you can change these
     public static final int CELL_SIZE = 5; // interior size, excludes wall of thickness 1
     public static final int WALL_HEIGHT = 4;
 
-    public static final int WALL_BLOCK_ID = Block.DIAMOND_BLOCK.id;
+    public static final int WALL_BLOCK_ID = Voidcalls.ADMINSPACE_BLOCK.id;
     public static final int FLOOR_BLOCK_ID = Voidcalls.ADMINSPACE_BLOCK.id;
     public static final int LIGHT_BLOCK_ID = Voidcalls.ADMINSPACE_LIGHT_BLOCK.id;
 
@@ -24,17 +29,19 @@ public class AdminspaceMazeCellFeature extends Feature {
     public boolean generate(World world, Random random, int cellX, int unused, int cellZ) {
 
         // walls
-        for (int i = 0; i < CELL_SIZE_PLUS_WALL; i++) {
+        for (int y = 1; y <= WALL_HEIGHT; y++)
+            for (int i = 0; i < CELL_SIZE_PLUS_WALL; i++) {
 
-            world.setBlockWithoutNotifyingNeighbors(cellX + i, 1, cellZ, WALL_BLOCK_ID);
-            world.setBlockWithoutNotifyingNeighbors(cellX, 1, cellZ + i, WALL_BLOCK_ID);
-        }
+                world.setBlockWithoutNotifyingNeighbors(cellX + i, y, cellZ, WALL_BLOCK_ID);
+                world.setBlockWithoutNotifyingNeighbors(cellX, y, cellZ + i, WALL_BLOCK_ID);
+            }
 
-        // floor
+        // floor and ceiling
         for (int x = 0; x < CELL_SIZE_PLUS_WALL; x++) {
             for (int z = 0; z < CELL_SIZE_PLUS_WALL; z++) {
 
                 world.setBlockWithoutNotifyingNeighbors(cellX + x, 0, cellZ + z, FLOOR_BLOCK_ID);
+                world.setBlockWithoutNotifyingNeighbors(cellX + x, WALL_HEIGHT + 1, cellZ + z, FLOOR_BLOCK_ID);
             }
         }
 
@@ -78,8 +85,9 @@ public class AdminspaceMazeCellFeature extends Feature {
 
     private void placeNegXDoor(World world, int cellX, int cellZ) {
 
-        for (int i = 1; i < CELL_SIZE_PLUS_WALL; i++)
-            world.setBlockWithoutNotifyingNeighbors(cellX, 1, cellZ + i, 0);
+        for (int y = 1; y <= WALL_HEIGHT; y++)
+            for (int i = 1; i < CELL_SIZE_PLUS_WALL; i++)
+                world.setBlockWithoutNotifyingNeighbors(cellX, y, cellZ + i, 0);
     }
 
 //    private void placePosXDoor(World world, int cellX, int cellZ) {
@@ -88,8 +96,9 @@ public class AdminspaceMazeCellFeature extends Feature {
 
     private void placeNegZDoor(World world, int cellX, int cellZ) {
 
-        for (int i = 1; i < CELL_SIZE_PLUS_WALL; i++)
-            world.setBlockWithoutNotifyingNeighbors(cellX + i, 1, cellZ, 0);
+        for (int y = 1; y <= WALL_HEIGHT; y++)
+            for (int i = 1; i < CELL_SIZE_PLUS_WALL; i++)
+                world.setBlockWithoutNotifyingNeighbors(cellX + i, y, cellZ, 0);
     }
 
 //    private void placePosZDoor(World world, int cellX, int cellZ) {
