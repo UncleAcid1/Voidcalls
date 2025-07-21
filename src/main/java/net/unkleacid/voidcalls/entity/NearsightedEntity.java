@@ -20,9 +20,9 @@ import java.util.Random;
 
 @SuppressWarnings("UnnecessaryBoxing")
 @HasTrackingParameters(updatePeriod = 4, sendVelocity = TriState.TRUE, trackingDistance = 30)
-public class NotextureEntity extends AnimalEntity implements MobSpawnDataProvider {
+public class NearsightedEntity extends AnimalEntity implements MobSpawnDataProvider {
 
-    private static final String TEXTURE_PATH = "/assets/voidcalls/stationapi/textures/entity/notexture.png";
+    private static final String TEXTURE_PATH = "/assets/voidcalls/stationapi/textures/entity/nearsighted.png";
 
     private int wanderCooldown, wanderTicks;
     private float wanderYaw;
@@ -32,7 +32,7 @@ public class NotextureEntity extends AnimalEntity implements MobSpawnDataProvide
     private int teleportCooldown = 0;
     private int placeBlockTimer = 0;
 
-    public NotextureEntity(World world) {
+    public NearsightedEntity(World world) {
         super(world);
         this.texture = TEXTURE_PATH;
         this.maxHealth = 20;
@@ -42,7 +42,7 @@ public class NotextureEntity extends AnimalEntity implements MobSpawnDataProvide
         this.wanderCooldown = 2000 + this.random.nextInt(4000);
     }
 
-    public NotextureEntity(World world, Double x, Double y, Double z) {
+    public NearsightedEntity(World world, Double x, Double y, Double z) {
         this(world);
         this.setPosition(x, y, z);
     }
@@ -212,7 +212,7 @@ public class NotextureEntity extends AnimalEntity implements MobSpawnDataProvide
 
     @Override
     public Identifier getHandlerIdentifier() {
-        return Voidcalls.NAMESPACE.id("notexture");
+        return Voidcalls.NAMESPACE.id("nearsighted");
     }
 
     @Override

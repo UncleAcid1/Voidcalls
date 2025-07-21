@@ -4,7 +4,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.world.World;
-import net.unkleacid.voidcalls.entity.NotextureEntity;
+import net.unkleacid.voidcalls.entity.NearsightedEntity;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -26,7 +26,7 @@ public final class VoidCallsClient {
         if (world == null) return;
         if (!(raw instanceof LivingEntity player)) return;
 
-        NotextureEntity target = findClosestNotexture(world, player, 7.0);
+        NearsightedEntity target = findClosestNotexture(world, player, 7.0);
         if (target != null) {
             if (!helloPlayed) {
                 playHello(mc, target);
@@ -37,7 +37,7 @@ public final class VoidCallsClient {
         }
     }
 
-    private static void playHello(Minecraft mc, NotextureEntity e) {
+    private static void playHello(Minecraft mc, NearsightedEntity e) {
         if (soundManagerField == null) {
             for (Field f : mc.getClass().getDeclaredFields()) {
                 if (f.getName().toLowerCase().contains("snd")) {
@@ -75,13 +75,13 @@ public final class VoidCallsClient {
         }
     }
 
-    private static NotextureEntity findClosestNotexture(World world, LivingEntity player, double maxDist) {
+    private static NearsightedEntity findClosestNotexture(World world, LivingEntity player, double maxDist) {
         double maxSq = maxDist * maxDist;
-        NotextureEntity closest = null;
+        NearsightedEntity closest = null;
         @SuppressWarnings("unchecked")
         List<Entity> list = (List<Entity>) world.entities;
         for (Entity ent : list) {
-            if (ent instanceof NotextureEntity ne) {
+            if (ent instanceof NearsightedEntity ne) {
                 double dx = ne.x - player.x,
                         dy = ne.y - player.y,
                         dz = ne.z - player.z;

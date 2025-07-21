@@ -6,7 +6,7 @@ import net.minecraft.client.render.entity.model.EntityModel;
 import net.minecraft.entity.LivingEntity;
 
 @Environment(EnvType.CLIENT)
-public class NotextureEntityModel extends EntityModel {
+public class NearsightedEntityModel extends EntityModel {
     public TropiModelPart body = new TropiModelPart(0, 0);
     public TropiModelPart rightArm = new TropiModelPart(0, 0);
     public TropiModelPart leftArm = new TropiModelPart(0, 0);
@@ -37,7 +37,7 @@ public class NotextureEntityModel extends EntityModel {
     public TropiModelPart h22 = new TropiModelPart(0, 0);
     public TropiModelPart h23 = new TropiModelPart(0, 0);
 
-    public NotextureEntityModel() {
+    public NearsightedEntityModel() {
         body.addCube(-4F, 12F, -2F, 8, 12, 4, 0F, 12F, 0F);
         rightArm.addCube(4F, 12F, -2F, 4, 12, 4, 4F, 24F, -2F);
         leftArm.addCube(-8F, 12F, -2F, 4, 12, 4, -8F, 24F, -2F);

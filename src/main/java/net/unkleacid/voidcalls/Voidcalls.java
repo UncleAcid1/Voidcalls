@@ -2,7 +2,6 @@ package net.unkleacid.voidcalls;
 
 import net.mine_diver.unsafeevents.listener.EventListener;
 import net.minecraft.block.Block;
-import net.minecraft.world.dimension.Dimension;
 import net.modificationstation.stationapi.api.event.entity.EntityRegister;
 import net.modificationstation.stationapi.api.event.registry.BlockRegistryEvent;
 import net.modificationstation.stationapi.api.event.registry.DimensionRegistryEvent;
@@ -17,7 +16,7 @@ import net.unkleacid.voidcalls.block.template.StairsBlockTemplate;
 import net.modificationstation.stationapi.api.util.Namespace;
 import net.unkleacid.voidcalls.dimension.AdminspaceDimension;
 import net.unkleacid.voidcalls.entity.AngelEntity;
-import net.unkleacid.voidcalls.entity.NotextureEntity;
+import net.unkleacid.voidcalls.entity.NearsightedEntity;
 import net.unkleacid.voidcalls.dimension.SolitudeDimension;
 import net.unkleacid.voidcalls.block.AdminspaceEntryBlock;
 import net.unkleacid.voidcalls.block.SolitudeReturnBlock;
@@ -112,14 +111,14 @@ public class Voidcalls {
 
     @EventListener
     public void registerEntities(EntityRegister event) {
-        event.register(NotextureEntity.class, "notexture");
+        event.register(NearsightedEntity.class, "notexture");
         event.register(AngelEntity.class,    "angel");
     }
 
     @EventListener
     public void registerMobHandlers(MobHandlerRegistryEvent event) {
         Registry.register(event.registry, NAMESPACE.id("angel"),    AngelEntity::new);
-        Registry.register(event.registry, NAMESPACE.id("notexture"), NotextureEntity::new);
+        Registry.register(event.registry, NAMESPACE.id("notexture"), NearsightedEntity::new);
     }
 
     @EventListener

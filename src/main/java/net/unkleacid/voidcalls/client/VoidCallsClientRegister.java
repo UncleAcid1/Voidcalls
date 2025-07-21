@@ -10,9 +10,9 @@ import net.modificationstation.stationapi.api.client.texture.atlas.ExpandableAtl
 import net.modificationstation.stationapi.api.mod.entrypoint.Entrypoint;
 import net.modificationstation.stationapi.api.util.Namespace;
 import net.unkleacid.voidcalls.entity.AngelEntity;
-import net.unkleacid.voidcalls.entity.NotextureEntity;
+import net.unkleacid.voidcalls.entity.NearsightedEntity;
 import net.unkleacid.voidcalls.entity.renderer.AngelEntityRenderer;
-import net.unkleacid.voidcalls.entity.renderer.NotextureEntityRenderer;
+import net.unkleacid.voidcalls.entity.renderer.NearsightedEntityRenderer;
 
 @Entrypoint
 @Environment(EnvType.CLIENT)
@@ -25,12 +25,12 @@ public class VoidCallsClientRegister {
     public void onTextureRegister(TextureRegisterEvent event) {
         ExpandableAtlas atlas = Atlases.getTerrain();
         atlas.addTexture(NAMESPACE.id("angel"));
-        atlas.addTexture(NAMESPACE.id("notexture"));
+        atlas.addTexture(NAMESPACE.id("nearsighted"));
     }
 
     @EventListener
     public void registerEntityRenderers(EntityRendererRegisterEvent event) {
         event.renderers.put(AngelEntity.class,     new AngelEntityRenderer());
-        event.renderers.put(NotextureEntity.class, new NotextureEntityRenderer());
+        event.renderers.put(NearsightedEntity.class, new NearsightedEntityRenderer());
     }
 }
