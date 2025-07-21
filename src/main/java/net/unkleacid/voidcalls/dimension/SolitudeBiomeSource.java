@@ -22,7 +22,6 @@ public class SolitudeBiomeSource extends BiomeSource {
         for (int i = 0; i < biomes.length; i++) {
             biomes[i] = LEAVE_BIOME;
 
-            // Avoid crashes with dummy data
             temperatureMap[i] = 0.0;
             downfallMap[i] = 0.0;
             weirdnessMap[i] = 0.0;

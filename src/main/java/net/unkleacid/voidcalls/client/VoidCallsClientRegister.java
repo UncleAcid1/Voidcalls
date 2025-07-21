@@ -11,8 +11,10 @@ import net.modificationstation.stationapi.api.mod.entrypoint.Entrypoint;
 import net.modificationstation.stationapi.api.util.Namespace;
 import net.unkleacid.voidcalls.entity.AngelEntity;
 import net.unkleacid.voidcalls.entity.NearsightedEntity;
+import net.unkleacid.voidcalls.entity.LamplighterEntity;
 import net.unkleacid.voidcalls.entity.renderer.AngelEntityRenderer;
 import net.unkleacid.voidcalls.entity.renderer.NearsightedEntityRenderer;
+import net.unkleacid.voidcalls.entity.renderer.LamplighterEntityRenderer;
 
 @Entrypoint
 @Environment(EnvType.CLIENT)
@@ -26,11 +28,13 @@ public class VoidCallsClientRegister {
         ExpandableAtlas atlas = Atlases.getTerrain();
         atlas.addTexture(NAMESPACE.id("angel"));
         atlas.addTexture(NAMESPACE.id("nearsighted"));
+        atlas.addTexture(NAMESPACE.id("lamplighter"));
     }
 
     @EventListener
     public void registerEntityRenderers(EntityRendererRegisterEvent event) {
         event.renderers.put(AngelEntity.class,     new AngelEntityRenderer());
         event.renderers.put(NearsightedEntity.class, new NearsightedEntityRenderer());
+        event.renderers.put(LamplighterEntity.class, new LamplighterEntityRenderer());
     }
 }

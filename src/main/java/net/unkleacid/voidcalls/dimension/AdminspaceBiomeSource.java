@@ -3,10 +3,10 @@ package net.unkleacid.voidcalls.dimension;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.source.BiomeSource;
-import net.unkleacid.voidcalls.world.biome.LeaveBiome;
+import net.unkleacid.voidcalls.world.biome.AdminspaceBiome;
 
 public class AdminspaceBiomeSource extends BiomeSource {
-    public static final Biome LEAVE_BIOME = new LeaveBiome();
+    public static final Biome ADMINSPACE_BIOME = new AdminspaceBiome();
 
     public AdminspaceBiomeSource(World world) {
         super(world);
@@ -20,7 +20,7 @@ public class AdminspaceBiomeSource extends BiomeSource {
         this.weirdnessMap = new double[width * depth];
 
         for (int i = 0; i < biomes.length; i++) {
-            biomes[i] = LEAVE_BIOME;
+            biomes[i] = ADMINSPACE_BIOME;
 
             // Avoid crashes with dummy data
             temperatureMap[i] = 0.0;

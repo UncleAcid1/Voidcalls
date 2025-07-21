@@ -17,9 +17,11 @@ import net.modificationstation.stationapi.api.util.Namespace;
 import net.unkleacid.voidcalls.dimension.AdminspaceDimension;
 import net.unkleacid.voidcalls.entity.AngelEntity;
 import net.unkleacid.voidcalls.entity.NearsightedEntity;
+import net.unkleacid.voidcalls.entity.LamplighterEntity;
 import net.unkleacid.voidcalls.dimension.SolitudeDimension;
 import net.unkleacid.voidcalls.block.AdminspaceEntryBlock;
 import net.unkleacid.voidcalls.block.SolitudeReturnBlock;
+import net.unkleacid.voidcalls.block.ErrLightBlock;
 
 
 @Entrypoint
@@ -32,6 +34,7 @@ public class Voidcalls {
     public static Block SOLITUDERETURNPORTAL;
     public static Block ADMINSPACEPORTAL;
     public static Block ERR_TEXTURE_BLOCK;
+    public static Block ERR_LIGHT_BLOCK;
     public static Block GLOWING_OBSIDIAN_BLOCK;
     public static Block GLOWING_OBSIDIAN_SLAB;
     public static Block GLOWING_OBSIDIAN_STAIRS;
@@ -44,15 +47,18 @@ public class Voidcalls {
 
     @EventListener
     public void registerBlocks(BlockRegistryEvent event) {
+        //Various Portal blocks ;p
         SOLITUDEPORTAL = new SolitudeBlock(NAMESPACE.id("1010101010"))
                 .setTranslationKey(NAMESPACE, "1010101010");
         SOLITUDERETURNPORTAL = new SolitudeReturnBlock(NAMESPACE.id("LEAVE"))
                 .setTranslationKey(NAMESPACE, "LEAVE");
         ADMINSPACEPORTAL = new AdminspaceEntryBlock(NAMESPACE.id("null"))
                 .setTranslationKey(NAMESPACE, "null");
-        //ERR_TEXTURE_BLOCK CODE :3
+        //ERR_TEXTURE_BLOCK and ERR_LIGHT_BLOCK registers
         ERR_TEXTURE_BLOCK = new ErrTextureBlock(NAMESPACE.id("err_texture"))
                 .setTranslationKey(NAMESPACE, "err_texture");
+        ERR_LIGHT_BLOCK = new ErrLightBlock(NAMESPACE.id("err_light"))
+                .setTranslationKey(NAMESPACE, "err_light");
 
         //GLOWING OBSIDIAN BLOCKS (RED HOT N SPICY >:3)
         GLOWING_OBSIDIAN_BLOCK = new GlowingObsidianBlock(NAMESPACE.id("0-"))
@@ -113,12 +119,14 @@ public class Voidcalls {
     public void registerEntities(EntityRegister event) {
         event.register(NearsightedEntity.class, "nearsighted");
         event.register(AngelEntity.class,    "angel");
+        event.register(LamplighterEntity.class,    "lamplighter");
     }
 
     @EventListener
     public void registerMobHandlers(MobHandlerRegistryEvent event) {
         Registry.register(event.registry, NAMESPACE.id("angel"),    AngelEntity::new);
         Registry.register(event.registry, NAMESPACE.id("nearsighted"), NearsightedEntity::new);
+        Registry.register(event.registry, NAMESPACE.id("lamplighter"), LamplighterEntity::new);
     }
 
     @EventListener

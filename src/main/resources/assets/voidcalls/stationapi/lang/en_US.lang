@@ -1,4 +1,5 @@
 tile.voidcalls.err_texture.name=err.texture
+tile.voidcalls.err_light.name=err.light
 tile.voidcalls.LEAVE.name=LEAVE
 tile.voidcalls.1010101010.name=1010101010
 tile.voidcalls.null.name=null
