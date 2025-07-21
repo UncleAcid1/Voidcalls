@@ -111,14 +111,14 @@ public class Voidcalls {
 
     @EventListener
     public void registerEntities(EntityRegister event) {
-        event.register(NearsightedEntity.class, "notexture");
+        event.register(NearsightedEntity.class, "nearsighted");
         event.register(AngelEntity.class,    "angel");
     }
 
     @EventListener
     public void registerMobHandlers(MobHandlerRegistryEvent event) {
         Registry.register(event.registry, NAMESPACE.id("angel"),    AngelEntity::new);
-        Registry.register(event.registry, NAMESPACE.id("notexture"), NearsightedEntity::new);
+        Registry.register(event.registry, NAMESPACE.id("nearsighted"), NearsightedEntity::new);
     }
 
     @EventListener

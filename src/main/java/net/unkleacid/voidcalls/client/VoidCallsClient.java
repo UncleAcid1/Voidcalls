@@ -26,7 +26,7 @@ public final class VoidCallsClient {
         if (world == null) return;
         if (!(raw instanceof LivingEntity player)) return;
 
-        NearsightedEntity target = findClosestNotexture(world, player, 7.0);
+        NearsightedEntity target = findClosestNearsighted(world, player, 7.0);
         if (target != null) {
             if (!helloPlayed) {
                 playHello(mc, target);
@@ -75,7 +75,7 @@ public final class VoidCallsClient {
         }
     }
 
-    private static NearsightedEntity findClosestNotexture(World world, LivingEntity player, double maxDist) {
+    private static NearsightedEntity findClosestNearsighted(World world, LivingEntity player, double maxDist) {
         double maxSq = maxDist * maxDist;
         NearsightedEntity closest = null;
         @SuppressWarnings("unchecked")

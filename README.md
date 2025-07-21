@@ -18,7 +18,7 @@ An absolutely huge thank you to Dairycultist who is responsible for implementing
 
 ## Entities
 
-### Notexture (DONE!)
+### Nearsighted (DONE!)
 
 -Model/Textures (done? A little buggy, im gonna beg Dany to help me understand Tropimodels.)
 
@@ -30,9 +30,7 @@ An absolutely huge thank you to Dairycultist who is responsible for implementing
 
 -Exponentially small spawn rate so it's actually a surprise to see one.
 
--Walking/getting chased into touching Notexture takes you to the Solitude dimension which is similar to the skylands/aether but the islands are huge and more flat and stack ontop of each other. Made entirely out of err.soil blocks which are grainy black blocks. Sky is dim and it is very difficult to see. No fall damage. You must drop down far enough to land in the notexture water blocks and you get sent back to your respawn anchor.
-
--Will despawn at noon everyday.
+-Walking/getting chased into touching Nearsighted takes you to the Solitude dimension which is similar to the skylands/aether but the islands are huge and more flat and stack ontop of each other. Made entirely out of bedrock blocks. Sky is dim and it is very difficult to see. You must drop down far enough to land in the "blocks" and you get sent back to your respawn anchor.
 
 ### Subjugate/Integrity (UNIMPLEMENTED)
 
@@ -84,7 +82,7 @@ An absolutely huge thank you to Dairycultist who is responsible for implementing
 
 -Ai Mechanics-Will stalk player by watching from a distance, if a player looks at its hitbox too long it will run after the player at high speeds. Can scale 4 blocks. Will not break anything, but can pass through 1 block gaps. Will do large amounts of damage, but will not insta-kill.
 
--Spawn same as Notexture.
+-Spawn same as Nearsighted.
 
 -If killed drops adminspace block, similar to bedrock but can be broken by explosions.
 
@@ -138,7 +136,7 @@ An absolutely huge thank you to Dairycultist who is responsible for implementing
 
 -adminspace.light block, same as adminspace block.
 
--err.notexture block, magenta and black checkered cube. Player can walk through.
+-err.texture block, magenta and black checkered cube. Player can walk through.
 
 -err.integrity block, which is adminspace block with err on it.
 
@@ -167,7 +165,7 @@ All sounds are W.I.P. but are original except for the moon error, which is from 
 
 -Occasionally, the player will be sent to a maze dimension made entirely out of adminspace and adminspace.light blocks. DONE HAHAHAH TY CULTIST :D
 
--Occasionally, a large chunk of notexture blocks will spawn in the sky.
+-Occasionally, a large chunk of err.texture blocks will spawn in the sky.
 
 -Occasionally, chat messages (client only, maybe?) will appear on your screen.
 
