@@ -23,7 +23,7 @@ public class SolitudeEntryPortalForcer extends PortalForcer {
         int ix = MathHelper.floor(entity.x);
         int iz = MathHelper.floor(entity.z);
 
-        int safeY = world.getTopY(ix, iz);
+        int safeY = world.getTopSolidBlockY(ix, iz);
 
         BlockPos dest = new BlockPos(ix, safeY, iz);
 

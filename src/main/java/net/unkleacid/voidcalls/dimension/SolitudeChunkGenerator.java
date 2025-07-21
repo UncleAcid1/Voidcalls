@@ -11,6 +11,7 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.ChunkSource;
 import net.modificationstation.stationapi.impl.world.chunk.FlattenedChunk;
+import net.unkleacid.voidcalls.Voidcalls;
 
 public class SolitudeChunkGenerator implements ChunkSource {
     private final Random random;
@@ -51,6 +52,13 @@ public class SolitudeChunkGenerator implements ChunkSource {
                         }
                     }
                 }
+            }
+        }
+
+        for (int bx = 0; bx < 16; bx++) {
+            for (int bz = 0; bz < 16; bz++) {
+                int idx = (bx << 11) | (bz << 7) | 0;
+                blocks[idx] = (byte) Voidcalls.SOLITUDERETURNPORTAL.id;
             }
         }
     }
