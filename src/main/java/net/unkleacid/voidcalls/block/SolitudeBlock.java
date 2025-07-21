@@ -3,9 +3,10 @@ package net.unkleacid.voidcalls.block;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.material.Material;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.world.World;
-import net.unkleacid.voidcalls.teleport.NoCreatePortalForcer;
+import net.unkleacid.voidcalls.teleport.SolitudeEntryPortalForcer;
 import net.modificationstation.stationapi.api.block.CustomPortal;
 import net.modificationstation.stationapi.api.template.block.TemplateBlock;
 import net.modificationstation.stationapi.api.util.Identifier;
@@ -18,9 +19,11 @@ public class SolitudeBlock extends TemplateBlock implements CustomPortal {
     }
 
     @Override
-    public boolean onUse(World world, int x, int y, int z, PlayerEntity player) {
-        switchDimension(player);
-        return true;
+    public void onEntityCollision(World world, int x, int y, int z, Entity entity) {
+        if (!world.isRemote && entity instanceof PlayerEntity player) {
+            this.switchDimension(player);
+            getTravelAgent(player).moveToPortal(world, player);
+        }
     }
 
     @Override
@@ -29,8 +32,8 @@ public class SolitudeBlock extends TemplateBlock implements CustomPortal {
     }
 
     @Override
-    public NoCreatePortalForcer getTravelAgent(PlayerEntity playerEntity) {
-        return new NoCreatePortalForcer();
+    public SolitudeEntryPortalForcer getTravelAgent(PlayerEntity playerEntity) {
+        return new SolitudeEntryPortalForcer();
     }
 
     @Override
