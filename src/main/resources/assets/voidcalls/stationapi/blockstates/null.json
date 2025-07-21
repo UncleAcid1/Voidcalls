@@ -1,5 +1,5 @@
 {
   "variants": {
-    "": { "model": "voidcalls:block/contained.adminspace" }
+    "": { "model": "voidcalls:block/null" }
   }
 }

@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/cube_all",
   "textures": {
-    "all": "voidcalls:block/err_texture"
+    "all": "voidcalls:block/LEAVE"
   }
 }
