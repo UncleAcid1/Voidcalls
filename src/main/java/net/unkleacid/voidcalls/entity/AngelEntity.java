@@ -1,7 +1,6 @@
 package net.unkleacid.voidcalls.entity;
 
 import net.danygames2014.nyalib.sound.SoundHelper;
-import net.minecraft.entity.LightningEntity;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
@@ -16,7 +15,6 @@ import net.modificationstation.stationapi.api.util.Identifier;
 import net.modificationstation.stationapi.api.util.TriState;
 import net.unkleacid.voidcalls.Voidcalls;
 
-@SuppressWarnings("UnnecessaryBoxing")
 @HasTrackingParameters(updatePeriod = 4, sendVelocity = TriState.TRUE, trackingDistance = 30)
 public class AngelEntity extends AnimalEntity implements MobSpawnDataProvider {
 
@@ -27,12 +25,14 @@ public class AngelEntity extends AnimalEntity implements MobSpawnDataProvider {
     private int phase = 0;
     private int stareTicks = 0;
     private int chaseTicks = 0;
-    private int lightningTrailCooldown = 0;
+    private int lifeTicks = 0;
+    private static final int MAX_LIFE_TICKS = 1300;
+    private static final int MAX_CHASE_TICKS = 300;
 
     public AngelEntity(World world) {
         super(world);
         this.texture = TEXTURE_PATH;
-        this.maxHealth = 10;
+        this.maxHealth = 30;
         this.health = 10;
         this.stepHeight = 3.0F;
         this.setBoundingBoxSpacing(1.0F, 3.0F);
@@ -49,7 +49,7 @@ public class AngelEntity extends AnimalEntity implements MobSpawnDataProvider {
     public void tick() {
         super.tick();
 
-        PlayerEntity closest = this.world.getClosestPlayer(this, 28.0);
+        PlayerEntity closest = this.world.getClosestPlayer(this, 13.0);
         if (closest != null) {
             if (phase == 0) {
                 phase = 1;
@@ -87,13 +87,19 @@ public class AngelEntity extends AnimalEntity implements MobSpawnDataProvider {
                 }
             }
         }
+        if (!world.isRemote) {
+            lifeTicks++;
+            if (lifeTicks >= MAX_LIFE_TICKS || (phase == 2 && chaseTicks >= MAX_CHASE_TICKS)) {
+                this.markDead();
+            }
+        }
     }
 
     private void stareBehavior(PlayerEntity player) {
         stareTicks++;
         facePlayer(player);
         zeroMotion();
-        if (stareTicks >= 50) {
+        if (stareTicks >= 100) {
             phase = 2;
             chaseTicks = 0;
         }
@@ -128,16 +134,7 @@ public class AngelEntity extends AnimalEntity implements MobSpawnDataProvider {
         this.velocityZ = MathHelper.cos(rad) * 0.3;
         this.yaw = this.bodyYaw = this.prevYaw = wanderYaw;
 
-        if (!world.isRemote) {
-            lightningTrailCooldown++;
-            if (lightningTrailCooldown >= 45) {
-                lightningTrailCooldown = 0;
-                LightningEntity bolt = new LightningEntity(world, this.x, this.y, this.z);
-                world.spawnEntity(bolt);
-            }
-        }
-
-        if (chaseTicks < 1000 && chaseTicks % 3 == 0) {
+        if (chaseTicks < MAX_CHASE_TICKS && chaseTicks % 3 == 0) {
             SoundHelper.playSound(world, MathHelper.floor(x), MathHelper.floor(y), MathHelper.floor(z), "voidcalls:lightning", 0.9F, 0.4F);
         }
     }
