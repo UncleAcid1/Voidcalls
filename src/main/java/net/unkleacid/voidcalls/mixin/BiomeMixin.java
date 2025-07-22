@@ -20,7 +20,7 @@ public class BiomeMixin {
 
     @Inject(method = "<init>", at = @At("TAIL"))
     public void addVoidcallsSpawns(CallbackInfo ci) {
-        this.spawnablePassive.add(new EntitySpawnGroup(NearsightedEntity.class, 1));
-        this.spawnablePassive.add(new EntitySpawnGroup(AngelEntity.class, 1));
+        this.spawnablePassive.add(new EntitySpawnGroup(NearsightedEntity.class, 13));
+        this.spawnablePassive.add(new EntitySpawnGroup(AngelEntity.class, 100));
     }
 }

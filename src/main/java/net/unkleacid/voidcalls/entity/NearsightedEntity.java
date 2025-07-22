@@ -188,14 +188,22 @@ public class NearsightedEntity extends AnimalEntity implements MobSpawnDataProvi
 
     @Override
     public boolean canSpawn() {
+        int lightLevel = world.getLightLevel(
+                MathHelper.floor(this.x),
+                MathHelper.floor(this.y),
+                MathHelper.floor(this.z)
+        );
+
         return this.y > 64
                 && this.world.hasSkyLight(
                 MathHelper.floor(this.x),
                 MathHelper.floor(this.y),
                 MathHelper.floor(this.z)
         )
-                && this.random.nextInt(100) == 0;
+                && lightLevel > 8
+                && this.random.nextInt(1) == 0;
     }
+
 
     @Override
     public void writeNbt(NbtCompound nbt) {

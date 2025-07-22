@@ -37,8 +37,8 @@ public class SolitudeChunkGenerator implements ChunkSource {
         for (int x = 0; x < width; ++x) {
             for (int z = 0; z < depth; ++z) {
                 for (int y = 0; y < 32; ++y) {
-                    double v000 = heightMap[((x + 0) * (depth + 1) + z + 0) * height + y + 0];
-                    double v001 = heightMap[((x + 0) * (depth + 1) + z + 0) * height + y + 1];
+                    double v000 = heightMap[((x) * (depth + 1) + z) * height + y];
+                    double v001 = heightMap[((x) * (depth + 1) + z) * height + y + 1];
                     double dy = (v001 - v000) * 0.25;
 
                     for (int i = 0; i < 4; ++i) {
