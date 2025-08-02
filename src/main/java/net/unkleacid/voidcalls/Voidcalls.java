@@ -14,11 +14,15 @@ import net.unkleacid.voidcalls.block.*;
 import net.unkleacid.voidcalls.block.template.SlabBlockTemplate;
 import net.unkleacid.voidcalls.block.template.StairsBlockTemplate;
 import net.modificationstation.stationapi.api.util.Namespace;
+//dimensions
 import net.unkleacid.voidcalls.dimension.AdminspaceDimension;
+import net.unkleacid.voidcalls.dimension.SolitudeDimension;
+//entities :D
 import net.unkleacid.voidcalls.entity.AngelEntity;
 import net.unkleacid.voidcalls.entity.NearsightedEntity;
 import net.unkleacid.voidcalls.entity.LamplighterEntity;
-import net.unkleacid.voidcalls.dimension.SolitudeDimension;
+import net.unkleacid.voidcalls.entity.SubjugateEntity;
+//blocks
 import net.unkleacid.voidcalls.block.AdminspaceEntryBlock;
 import net.unkleacid.voidcalls.block.SolitudeReturnBlock;
 import net.unkleacid.voidcalls.block.ErrLightBlock;
@@ -117,6 +121,7 @@ public class Voidcalls {
 
     @EventListener
     public void registerEntities(EntityRegister event) {
+        event.register(SubjugateEntity.class, "subjugate");
         event.register(NearsightedEntity.class, "nearsighted");
         event.register(AngelEntity.class,    "angel");
         event.register(LamplighterEntity.class,    "lamplighter");
@@ -124,6 +129,7 @@ public class Voidcalls {
 
     @EventListener
     public void registerMobHandlers(MobHandlerRegistryEvent event) {
+        Registry.register(event.registry, NAMESPACE.id("subjugate"),    SubjugateEntity::new);
         Registry.register(event.registry, NAMESPACE.id("angel"),    AngelEntity::new);
         Registry.register(event.registry, NAMESPACE.id("nearsighted"), NearsightedEntity::new);
         Registry.register(event.registry, NAMESPACE.id("lamplighter"), LamplighterEntity::new);

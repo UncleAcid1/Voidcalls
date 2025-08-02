@@ -201,7 +201,7 @@ public class NearsightedEntity extends AnimalEntity implements MobSpawnDataProvi
                 MathHelper.floor(this.z)
         )
                 && lightLevel > 8
-                && this.random.nextInt(1) == 0;
+                && this.random.nextInt(6) == 0;
     }
 
 

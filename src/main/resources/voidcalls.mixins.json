@@ -9,7 +9,7 @@
     "access.EntityAccessor"
   ],
   "server": [],
-  "client": [],
+  "client": ["client.WorldRendererMixin"],
   "injectors": {
     "defaultRequire": 1
   }

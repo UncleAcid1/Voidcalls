@@ -14,8 +14,6 @@ import net.modificationstation.stationapi.api.server.entity.HasTrackingParameter
 import net.modificationstation.stationapi.api.util.Identifier;
 import net.modificationstation.stationapi.api.util.TriState;
 import net.unkleacid.voidcalls.Voidcalls;
-import net.modificationstation.stationapi.api.server.entity.VanillaSpawnDataProvider;
-import java.util.Optional;
 
 @HasTrackingParameters(updatePeriod = 4, sendVelocity = TriState.TRUE, trackingDistance = 30)
 public class AngelEntity extends AnimalEntity implements MobSpawnDataProvider {
@@ -162,7 +160,7 @@ public class AngelEntity extends AnimalEntity implements MobSpawnDataProvider {
         int lightLevel = world.getLightLevel(MathHelper.floor(x), MathHelper.floor(y), MathHelper.floor(z));
         return this.y > 64
                 && lightLevel < 8
-                && this.random.nextInt(4) == 0;
+                && this.random.nextInt(5) == 0;
     }
 
     @Override

@@ -3,15 +3,18 @@
   "id": "voidcalls",
   "version": "${version}",
   "name": "Voidcalls",
-  "description": "null.null.null.null.null.null.SUBJUGATE.INTEGRITY.null.null.null.null",
+  "description": "null.null.null.null.null.null.INTEGRITY.null.null.null.null",
   "authors": [ "UnkleAcid" ],
   "license": "MIT",
   "icon": "assets/voidcalls/icon.png",
   "environment": "*",
   "entrypoints": {
-    "stationapi:event_bus": ["net.unkleacid.voidcalls.Voidcalls"],
-    "stationapi:event_bus_client": ["net.unkleacid.voidcalls.client.VoidCallsClientRegister"],
-    "stationapi:event_bus_server": []
+    "stationapi:event_bus": [
+      "net.unkleacid.voidcalls.Voidcalls"],
+    "stationapi:event_bus_client": [
+      "net.unkleacid.voidcalls.client.VoidCallsClientRegister"],
+    "stationapi:event_bus_server": [
+    ]
   },
   "accessWidener": "voidcalls.accesswidener",
   "mixins": [ "voidcalls.mixins.json" ],
